@@ -1,14 +1,19 @@
 # Machine learning algorithms predicting acute care use for patients within 90-day of immune checkpoint inhibitors
-## Table of contents
+Table of contents
+=================
+<!--ts-->
+ * [eMethods](#emethods)
+   * [Data preparation](#data-preparation)
+   * [Model training and optimization](#model-training-and-optimization) 
+ * Candidate predictors used
+ * Figures for variable importance analysis
+ * Figures for Shapley additive explanation analysis
+<!--te-->
 
-1. [eMethods: Detailed data preparation, model optimization, and examination](##-emethods:-detailed-data-preparation,-model-optimization,-and-examination)
-2. Candidate predictors used
-3. Figures for variable importance analysis
-4. Figures for Shapley additive explanation analysis
-
-
-## eMethods: Detailed data preparation, model optimization, and examination
-### data preparation
+eMethods
+==============================================================
+Data preparation
+----------------
 We applied the following data preparation techniques to prepare the data before modeling according to thorough observations on the pre-coronavirus disease (COVID) training sample. 
 <ul>
   <li>Numeric predictors</li>
@@ -72,4 +77,7 @@ set.seed(my_seed)
 cvfolds<-vfold_cv(df_train, v = 10, strata = outcome)
 write_rds_file(cvfolds,"cvfolds.RDS")
 ```
-[back to top](#-machine-learning-algorithms-predicting-acute-care-use-for-patients-within-90-day-of-immune-checkpoint-inhibitors)
+ [back to top](#table-of-contents)
+ 
+ Model training and optimization
+ -------------------------------
