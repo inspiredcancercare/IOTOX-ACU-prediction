@@ -1,5 +1,13 @@
 # Machine learning algorithms predicting acute care use for patients within 90-day of immune checkpoint inhibitors
-## eMethod:Detailed data preparation, model optimization, and examination
+## Table of content
+
+1. [eMethods: Detailed data preparation, model optimization, and examination](##-emethods:-detailed-data-preparation,-model-optimization,-and-examination)
+2. Candidate predictors used
+3. Figures for variable importance analysis
+4. Figures for Shapley additive explanation analysis
+
+
+## eMethods: Detailed data preparation, model optimization, and examination
 ### data preparation
 We applied the following data preparation techniques to prepare the data before modeling according to thorough observations on the pre-coronavirus disease (COVID) training sample. 
 <ul>
@@ -15,7 +23,7 @@ We applied the following data preparation techniques to prepare the data before 
 	<li>All predictors</li>
 </ul>
 
-We carried our all data preparation steps using the [R recipes package version 0.1.16](https://cran.r-project.org/web/packages/recipes/recipes.pdf) with the following code after setting up the environment with necessary R pachages using our [setEnvironment.R]().
+We carried our all data preparation steps using the [R recipes package version 0.1.16](https://cran.r-project.org/web/packages/recipes/recipes.pdf) with the following code after setting up the environment with necessary R pachages using our [setEnvironment.R](https://github.com/inspiredcancercare/IOTOXACU/blob/ebd8db31e69fc480140ba78161109068a5273abe/setEnvironment.R).
 
 ```
 #-----load package------------
@@ -28,3 +36,4 @@ InstIfNec<-function (pack) {
   do.call(require,as.list(pack)) }
 lapply(packs, InstIfNec)
 ```
+[back to top](#-machine-learning-algorithms-predicting-acute-care-use-for-patients-within-90-day-of-immune-checkpoint-inhibitors)
