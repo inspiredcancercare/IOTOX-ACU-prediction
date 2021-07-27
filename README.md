@@ -83,18 +83,52 @@ write_rds_file(cvfolds,"cvfolds.RDS")
  -------------------------------
  
  eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and optimal values
- | ML algorithm | Hyperparameter | Search spaces | Value selected |
- |---		|---		 |---            |---		  |
- |LRENP		|penalty	 |10^-16 ~ 10^0  |0.00000000159   |
- |		|mixture 	 |0 - 1          |0.0437          |
- 
- |               |          Grouping             ||         Grouping 2         ||  Not Grouped    |
-| First Header  | Second Header | Third Header   | Forth Header | Fifth Header | Sixth Header    |
-| ------------- | :-----------: | -------------: | :----------: | :----------: | --------------- |
-| LRENP         |          *Long Cell*          ||         *Long Long Cell*                    |||
-| ^^            |   **Bold**    | 1. first item  | *Italic*     | 3. third item | + first point  |\
-| ^^            |               | 1. second item |              | 1. forth item | + second point |
+ <table>
+    <thead>
+        <tr>
+            <th> ML algorithm </th>
+            <th> Hyperparameter </th>
+            <th> Search spaces </th>
+	    <th> Value selected </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            	<td rowspan=2>LRENP</td>
+	    	<td> penalty</td>
+		<td> 10^-16 ~ 10^0 </td>
+		<td> 0.00000000159 </td>
+            </tr>
+        <tr>
+		<td> mixture </td>
+		<td> 0 - 1 </td>
+		<td> 0.00437 </td>
+            </tr>
+	<tr>
+	    	<td rowspan=3>RF</td>
+		<td> mtry </td>
+		<td> 1 - 81 </td>
+		<td> 73 </td>
+	    </tr>
+	<tr>
+		<td> trees </td>
+		<td> 500 - 4500 </td>
+		<td> 1138 </td>
+	    </tr>
+	<tr>
+		<td> min_n </td>
+		<td> 2 - 700 </td>
+		<td> 490 </td>
+	    </tr>
+        <tr>
+		<td rowspan=7>XGBT</td>
+        </tr>
+        <tr>
+		<td rowspan=3>SHLNN</td>
 
-| New section   |     More      |         Data   | ... - -- --- |||
-| And more      | With an escaped \|          || "Try 'quotes' in quotes "         |||
-[Compicated table]
+        </tr>
+    </tbody>
+</table>
+
+
+ 
