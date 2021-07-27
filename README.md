@@ -81,3 +81,20 @@ write_rds_file(cvfolds,"cvfolds.RDS")
  
  Model training and optimization
  -------------------------------
+ 
+ eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and optimal values
+ | ML algorithm | Hyperparameter | Search spaces | Value selected |
+ |---		|---		 |---            |---		  |
+ |LRENP		|penalty	 |10^-16 ~ 10^0  |0.00000000159   |
+ |		|mixture 	 |0 - 1          |0.0437          |
+ 
+ |               |          Grouping             ||         Grouping 2         ||  Not Grouped    |
+| First Header  | Second Header | Third Header   | Forth Header | Fifth Header | Sixth Header    |
+| ------------- | :-----------: | -------------: | :----------: | :----------: | --------------- |
+| LRENP         |          *Long Cell*          ||         *Long Long Cell*                    |||
+| ^^            |   **Bold**    | 1. first item  | *Italic*     | 3. third item | + first point  |\
+| ^^            |               | 1. second item |              | 1. forth item | + second point |
+
+| New section   |     More      |         Data   | ... - -- --- |||
+| And more      | With an escaped \|          || "Try 'quotes' in quotes "         |||
+[Compicated table]
