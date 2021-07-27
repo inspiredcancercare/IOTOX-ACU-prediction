@@ -5,8 +5,8 @@ Table of contents
  * [eMethods](#emethods)
    * [Data preparation](#data-preparation)
    * [Model training and optimization](#model-training-and-optimization)
-   * [Model calibration](#model-calibration)
-   * [Model] 
+   * [Model calibration and risk threshold determination](#model-calibration-and-risk-threshold-determination)
+   * [Model ] 
  * Candidate predictors used
  * Figures for variable importance analysis
  * Figures for Shapley additive explanation analysis
@@ -91,7 +91,7 @@ write_rds_file(cvfolds,"cvfolds.RDS")
 5. Compared the new model with the averaging AUROC of the inital models.
 6. Repeated step 3-5 until 40 iterations or no model improvement in 20 consecutive models were reach
 
-R code for the hyperparameter value selection and model training is avaialbe in [modeling.R](). We used [R tidymodels package version 0.1.0](https://www.tidymodels.org/)
+We used [R tidymodels package version 0.1.0](https://www.tidymodels.org/) to develop all models including the multivariate and univariate ECOG logistic regression. R code for all six models is avaialbe in [modeling.R](https://github.com/inspiredcancercare/IOTOXACU/blob/5451babcba443dd4e87b6e3a3b20889a641b6f91/modeling.R).
 
  eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and optimal values
  <table>
@@ -190,4 +190,17 @@ R code for the hyperparameter value selection and model training is avaialbe in 
 </table>
 
 [Back to top](#table-of-contents)
- 
+
+Model calibration and risk threshold determination
+--------------------------------------------------
+After creating ML models, we use Platt scaling method to create a calibration model for each model using the pre-COVID training sample. Specifically, we applied each our model to make predictions on the sample and fitted a logistic regression model to correlate model output and observed outcome for each model. We then use the calibration models to adjust the model outputs on the pre-COVID testing for our algorithms. 
+
+To determine the risk threshold, we caculated sensitivity and specificity over risk thresholds from 0.001 to 1 using calibrated optputs on the pre-COVID testing sample for each algorithm. We selected the threshold which maximize both sensitivity and specificity of each model. 
+
+We provide our code for model calibration and risk threshold determination in [reclassified.R]()
+
+
+[Back to top](#table-of-contents)
+
+Candidate predictors
+=================================================
