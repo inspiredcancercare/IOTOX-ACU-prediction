@@ -202,8 +202,313 @@ To determine the risk threshold, we caculated sensitivity and specificity over r
 
 We provide our code for model calibration and risk threshold determination in [reclassified.R]()
 
+eFigure 1. Sensitivity and specificity over acute care use risk thresholds from 0.001 to 1 for each algorithm
+
+***[TBA]***
 
 [Back to top](#table-of-contents)
 
 Candidate predictors
 =================================================
+
+ <table>
+    <thead>
+        <tr>
+            <th> Category </th>
+            <th> Name </th>
+            <th> Type </th>
+	    <th> Value </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            	<td rowspan=6> Basic information </td>
+	    	<td> Age </td>
+		<td> Numeric </td>
+		<td> TBA </td>
+            </tr>
+		<tr>
+			<td> Gender </td>
+			<td> Nominal </td>
+			<td> Male, Female </td>
+		    </tr>
+		<tr>
+			<td> Marital status </td>
+			<td> Nomial </td>
+			<td> Legally separated, Married, Other, Significant other, Single, Widowed, Divorced </td>
+		    </tr>
+		<tr>
+			<td> Smoking status </td>
+			<td> Nomial </td>
+			<td> Current Every Day Smoker, Current Some Day Smoker, Former Smoker, Heavy Tobacco Smoker, Light Tobacco Smoker, Never Smoker, Passive Smoke Exposure - Never Smoker, Smoker, Current Status Unknown   </td>
+		    </tr>		
+		<tr>
+			<td> ECOG </td>
+			<td> Ordinal </td>
+			<td> 0, 1, 2, 3, 4 </td>
+		    </tr>
+	   	<tr>
+			<td> ADI national </td>
+			<td> Ordinal </td>
+			<td> 0 - 99, GQ, GQ-PH, KVM, PH </td>
+		    </tr>
+	<tr>
+	    	<td rowspan=8>Treatment</td>
+		<td> RT 30 days before </td>
+		<td> Nominal</td>
+		<td> True, False </td>
+	    </tr>
+		<tr>
+			<td> Atezolizumab </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+		<tr>
+			<td> Avelumab </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	   	<tr>
+			<td> Cemiplimab-rwlc </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Durvalumab </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	   	<tr>
+			<td> Ipilimumab </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Nivolumab </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Pembrolizumab </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+        <tr>
+		<td rowspan=34>Cormobidity</td>
+		<td> Anxiety </td>
+		<td> Nominal </td>
+		<td> True, False </td>
+        </tr>
+		<tr>
+			<td> Anxiety </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Asthma </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Atherosclerosis </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Atrial Fibrillaton </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Cardiac arrhythmia </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Cerebrovascular accident </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Cerebrovascular disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Chronic kidney disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Chronic obstructive pulmonary disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Chronic pulmonary disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Congestive heart failure </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Coronary artery disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Deep vein thrombosis </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Dementia </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Depression </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Diabetes mellitus </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> ESRD </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Gerd </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Hemiplegia paraplegia </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Hypertension </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Hypothyroidism </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Mild liver disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Moderate or severe liver disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Myocardial infarction </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Neuropathy </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Obesity </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Obstructive sleep apnea </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Peripheral vascular disease </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Psychosis </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Pulmonary hypertension </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Rheumatoid arthritis </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Leukopenia </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>
+	    	<tr>
+			<td> Thrombocytopenia </td>
+			<td> Nominal </td>
+			<td> True, False </td>
+		    </tr>	    	   
+        <tr>
+		<td rowspan=9>Vital sign</td>
+		<td> Systolic blood pressure  </td>
+		<td> Numeric </td>
+		<td> TBA </td>
+        </tr>
+		<tr>
+			<td> Diastolic blood pressure </td>
+			<td> Numeric </td>
+			<td> TBA  </td>
+		    </tr>
+	    	<tr>
+			<td> Mean arterial pressure </td>
+			<td> Numeric </td>
+			<td> TBA </td>
+		    </tr>
+	    	<tr>
+			<td> Body temperature </td>
+			<td> Numeric </td>
+			<td> TBA </td>
+		    </tr>
+	    	<tr>
+			<td> Pulse </td>
+			<td> Numeric </td>
+			<td> TBA </td>
+		    </tr>
+	    	<tr>
+			<td> Respiration </td>
+			<td> Numeric </td>
+			<td> TBA </td>
+		    </tr>
+	    	<tr>
+			<td> SPO2 </td>
+			<td> Numeric </td>
+			<td> TBA </td>
+		    </tr>
+	    	<tr>
+			<td> BMI </td>
+			<td> Numeric </td>
+			<td> TBA </td>
+		    </tr>
+	    	<tr>
+			<td> Pain </td>
+			<td> Ordinal </td>
+			<td> 0 - 10 </td>
+		    </tr>
+	</tbody>
+</table>
