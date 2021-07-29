@@ -208,19 +208,29 @@ eFigure 1. Sensitivity and specificity over acute care use risk thresholds from 
 
 Model exmination and explanation
 --------------------------------
-To examine model performance, we calculated performance metrics including area under the receiver operating charactistic curve (AUROC), accuracy, sensitivity, specificity, positive predictive value, negative predictive value, and confusion matrix for each model after calibration wth corresponding risk threshold. We caculated the metrics on the post-COVID testing and peri-COVID samples. We used McNamer's test to statistically compare our ML algorithms to two logistic regression-based models in terms of AUROC on both samples. We carried out the McNamer's test with 1000 boostrapping replications and an alpha level of 0.05. The code for performance examination and statisitcal comparison is available in [performance.R]()
+To examine model performance, we calculated performance metrics including area under the receiver operating charactistic curve (AUROC), accuracy, sensitivity, specificity, positive predictive value, negative predictive value, and confusion matrix for each model after calibration wth corresponding risk threshold. We caculated the metrics on the post-COVID testing and peri-COVID samples. We used McNamer's test to statistically compare our ML algorithms to two logistic regression-based models in terms of AUROC on both samples. We carried out the McNamer's test with 2000 stratified boostrapping replications and an alpha level of 0.05. The code for performance examination and statisitcal comparison is available in [performance.R]()
 
 In addition to statistical examination, we used two model agnostic approaches, variable importance analysis and Shapley additive explanation, to provide additional insights into model behaviors and information potentially enabling individualized preventive intervention provision. We used [R DELAX package version 1.2.1](https://github.com/ModelOriented/DALEX) to reveal how our models utilized data to generate predictions for the peri-COVID sample. 
 
 For variable importance, we used the permuation approach to determine the importance of a predictor to an algorithm by measuring the prediction error fluctuations when randomly shuffling the predictor’s value. In this study, we use one minus AUROC as a founction to measure the prediction error. A predictor with a larger value of prediction error is more important to an algorithm. We used R code in [explanation.R]() to conduct the analysis. We present the result for random forest in our main paper and the rest ML algorithms here.
-eFigure 2. 
-eFigrue 3.
-eFigure 4.
+eFigure 2. Important variables for logistic regression with elastic net penalty.
+![image](https://user-images.githubusercontent.com/79476527/127511420-37ea9423-9f3e-480f-855c-0d7450e850a2.png)
+
+eFigure 3. Important variables for extreme gradient boosting trees.
+![image](https://user-images.githubusercontent.com/79476527/127511133-5fc6a51d-57dd-47ae-a1af-d547c30031b0.png)
+
+eFigrue 4. Important variables for single hidden layer neural network.
+![image](https://user-images.githubusercontent.com/79476527/127511237-14eba026-e4f3-41c6-b1c2-305bd774ef20.png)
 
 Another approch we used to explain our algorithms is an example-based explanation revealing model behavior on a particular instances of the peri-COVID sample. Specifically, we calculated shaply values to determine the contributions of predictor values for a randomly selected instance in the sample to the model output. We focused on the predictors which are most important (top 10) for each algorithm. R code for the analysis is available in [explanation.R](). The result for random forest algorithm is included in the main test, and we present the result for other algorithms here.
-eFigure 5. 
-eFigrue 6.
-eFigure 7.
+eFigure 5. Contributions of perdictor values to the perdiction of logistic regression with elastic net penalty for a random selected case in the periCOVID sample.
+![image](https://user-images.githubusercontent.com/79476527/127511846-5fd65032-b88c-4733-95f1-c799ec785950.png)
+
+eFigrue 6. Contributions of perdictor values to the perdiction of extreme gradient boosting trees for a random selected case in the periCOVID sample.
+![image](https://user-images.githubusercontent.com/79476527/127511884-a6f7d4a0-6396-4f58-aa91-1ca1120e6086.png)
+
+eFigure 7. Contributions of perdictor values to the perdiction of single hidden layer neural network for a random selected case in the periCOVID sample.
+![image](https://user-images.githubusercontent.com/79476527/127511867-1d527761-89fe-48a4-b198-f3e48133d8d2.png)
 
 [Back to top](#table-of-contents)
 
