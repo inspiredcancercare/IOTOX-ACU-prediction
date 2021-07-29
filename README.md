@@ -8,6 +8,7 @@ Table of contents
    * [Model calibration and risk threshold determination](#model-calibration-and-risk-threshold-determination)
    * [Model exmination and explanation](#model-exmination-and-explanation)
  * [Candidate predictors](#candidate-predictors)
+ * [Model calibration plots](#model-calibration-plots)
  * [Variable importance plots](#variable-importance-plots)
  * [Shapely additive explanation plots](#shapely-additive-explanation-plots)
 <!--te-->
@@ -680,6 +681,40 @@ Candidate predictors
 		    </tr>
 	</tbody>
 </table>
+
+[Back to top](#table-of-contents)
+
+Model calibration plots
+-----------------------
+
+We present calibration plots for all calibrated algorithms we examined on the peri-COVID sample in this section. The plot for the random forest algorithm is included in our main paper.
+
+eFigure 2. Calibration plots for the multivariate logistice regression algorithm.
+
+![image](https://user-images.githubusercontent.com/79476527/127537411-e0cd32ed-d0c1-4797-8f3f-2f54218f35de.png)
+
+**Note**: The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model are likely to underestimat the risk for patients with high ACU risk.
+
+eFigure 3. Calibration plots for the ECOG logistice regression algorithm.
+
+![image](https://user-images.githubusercontent.com/79476527/127537556-40014b79-ea3a-4696-a84e-2db64535d159.png)
+
+
+
+eFigure 4. Calibration plots for the logistice regression with elastic net panelty algorithm.
+
+![image](https://user-images.githubusercontent.com/79476527/127537090-e9ea0400-87f7-4baa-836c-e956d6d0a9fb.png)
+
+
+eFigure 5. Calibration plots for the extreme gradient boosting trees algorithm.
+
+![image](https://user-images.githubusercontent.com/79476527/127537728-2fd9d45b-ebf8-4854-a8a6-93e67d7ac32d.png)
+
+
+eFigure 6. Calibration plots for the single hidden layer neural network algorithm.
+
+![image](https://user-images.githubusercontent.com/79476527/127537882-80710349-7e51-4eef-b448-91607d9aa3da.png)
+
 
 [Back to top](#table-of-contents)
 
