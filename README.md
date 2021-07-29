@@ -213,10 +213,12 @@ To determine the risk threshold, we calculated sensitivity and specificity over 
 
 We provide our code for model calibration and risk threshold determination in [reclassified.R]()
 
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79476527/127394784-93f7fa17-5dcb-4ecc-92be-b4f3c1ed1e6b.png">
+</p>
+
 eFigure 1. Sensitivity and specificity over acute care use risk thresholds from 0.001 to 1 for each algorithm
-
-![image](https://user-images.githubusercontent.com/79476527/127394784-93f7fa17-5dcb-4ecc-92be-b4f3c1ed1e6b.png)
-
 
 [Back to top](#table-of-contents)
 
@@ -701,36 +703,45 @@ Model calibration plots
 
 We present calibration plots for all calibrated algorithms we examined on the peri-COVID sample in this section. The plot for the RF algorithm is included in our main paper.
 
-eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
 
-![image](https://user-images.githubusercontent.com/79476527/127537411-e0cd32ed-d0c1-4797-8f3f-2f54218f35de.png)
+<p align="center">
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537411-e0cd32ed-d0c1-4797-8f3f-2f54218f35de.png">
+</p>
+eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
 
 **Note:** The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model is likely to underestimate the risk for patients with high ACU risk.
 
-eFigure 3. Calibration plot for the ECOG logistic regression algorithm.
+<p align="center">
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537556-40014b79-ea3a-4696-a84e-2db64535d159.png">
+</p>
 
-![image](https://user-images.githubusercontent.com/79476527/127537556-40014b79-ea3a-4696-a84e-2db64535d159.png)
+eFigure 3. Calibration plot for the ECOG logistic regression algorithm.
 
 **Note:** The lack of alignment between the solid and dash lines in most areas indicates that the model is not well calibrated.
 
-eFigure 4. Calibration plot for the LRENP algorithm.
+<p align="center">
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537090-e9ea0400-87f7-4baa-836c-e956d6d0a9fb.png">
+</p>
 
-![image](https://user-images.githubusercontent.com/79476527/127537090-e9ea0400-87f7-4baa-836c-e956d6d0a9fb.png)
+eFigure 4. Calibration plot for the LRENP algorithm.
 
 **Note:** The calibration analysis result for the logistic regression with elastic net penalty algorithm is almost identical to the multivariate logistic regression, with the model outputs are more reliable for people with low to moderate (<=65%) ACU risk.
 
-eFigure 5. Calibration plot for the XGBT algorithm.
+<p align="center">
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537728-2fd9d45b-ebf8-4854-a8a6-93e67d7ac32d.png">
+</p>
 
-![image](https://user-images.githubusercontent.com/79476527/127537728-2fd9d45b-ebf8-4854-a8a6-93e67d7ac32d.png)
+eFigure 5. Calibration plot for the XGBT algorithm.
 
 **Note:** The calibration of the extreme gradient boosting trees algorithm is suboptimal with tending to overestimate the risks for patients with low risk (<20%) and underestimate the risk for patients with moderate to high risk (>=30%).
 
+<p align="center">
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537882-80710349-7e51-4eef-b448-91607d9aa3da.png">
+</p>
+
 eFigure 6. Calibration plot for the SHLNN algorithm.
 
-![image](https://user-images.githubusercontent.com/79476527/127537882-80710349-7e51-4eef-b448-91607d9aa3da.png)
-
 **Note:** The calibration plot suggests that the model generates reliable outputs for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
-
 
 
 [Back to top](#table-of-contents)
@@ -740,21 +751,23 @@ Variable importance plots
 
 We present the result for the RF algorithm in our main paper and the rest ML algorithms here.
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79476527/127511420-37ea9423-9f3e-480f-855c-0d7450e850a2.png">
+</p>
+
 eFigure 7. Important variables for LRENP.
 
-![image](https://user-images.githubusercontent.com/79476527/127511420-37ea9423-9f3e-480f-855c-0d7450e850a2.png)
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79476527/127511133-5fc6a51d-57dd-47ae-a1af-d547c30031b0.png">
+</p>
 
 eFigure 8. Important variables for XGBT.
 
-![image](https://user-images.githubusercontent.com/79476527/127511133-5fc6a51d-57dd-47ae-a1af-d547c30031b0.png)
-
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79476527/127511237-14eba026-e4f3-41c6-b1c2-305bd774ef20.png">
+</p>
 
 eFigrue 9. Important variables for SHLNN.
-
-![image](https://user-images.githubusercontent.com/79476527/127511237-14eba026-e4f3-41c6-b1c2-305bd774ef20.png)
-
 
 
 [Back to top](#table-of-contents)
@@ -766,19 +779,24 @@ Shapely additive explanation plots
 
 The result for the RF algorithm is included in the main test, and here are the results for other algorithms.
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79476527/127511846-5fd65032-b88c-4733-95f1-c799ec785950.png">
+</p>
+
 eFigure 10. Contributions of predictor values to the prediction of the LRENP algorithm for the randomly selected case.
 
-![image](https://user-images.githubusercontent.com/79476527/127511846-5fd65032-b88c-4733-95f1-c799ec785950.png)
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79476527/127511884-a6f7d4a0-6396-4f58-aa91-1ca1120e6086.png">
+</p>
 
 eFigrue 11. Contributions of predictor values to the prediction of the XGBT algorithm for the randomly selected case.
 
-![image](https://user-images.githubusercontent.com/79476527/127511884-a6f7d4a0-6396-4f58-aa91-1ca1120e6086.png)
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/79476527/127511867-1d527761-89fe-48a4-b198-f3e48133d8d2.png">
+</p>
 
 eFigure 12. Contributions of predictor values to the prediction of the SHLNN algorithm for the randomly selected case.
 
-![image](https://user-images.githubusercontent.com/79476527/127511867-1d527761-89fe-48a4-b198-f3e48133d8d2.png)
 
 
 
