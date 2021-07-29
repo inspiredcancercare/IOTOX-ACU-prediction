@@ -214,10 +214,15 @@ To examine model performance, we calculated performance metrics including area u
 
 In addition to statistical examination, we used two model agnostic approaches, variable importance analysis and Shapley additive explanation, to provide additional insights into model behaviors and information potentially enabling individualized preventive intervention provision. We used [R DELAX package version 1.2.1](https://github.com/ModelOriented/DALEX) to reveal how our models utilized data to generate predictions for the peri-COVID sample. 
 
-For variable importance, we used the permuation approach to determine the importance of a predictor to an algorithm by measuring the prediction error fluctuations when randomly shuffling the predictor’s value. In this study, we use one minus AUROC as a founction to measure the prediction error. A predictor with a larger value of prediction error is more important to an algorithm. 
+For variable importance, we used the permuation approach to determine the importance of a predictor to an algorithm by measuring the prediction error fluctuations when randomly shuffling the predictor’s value. In this study, we use one minus AUROC as a founction to measure the prediction error. A predictor with a larger value of prediction error is more important to an algorithm. We used R code in [explanation.R]() to conduct the analysis. We present the result for random forest in our main paper and the rest ML algorithms here.
+eFigure 2. 
+eFigrue 3.
+eFigure 4.
 
-Another approch we used to explain our algorithms is an example-based explanation revealing model behavior on a particular instances of the peri-COVID sample. Specifically, we calculated   
-
+Another approch we used to explain our algorithms is an example-based explanation revealing model behavior on a particular instances of the peri-COVID sample. Specifically, we calculated shaply values to determine the contributions of predictor values for a randomly selected instance in the sample to the model output. We focused on the predictors which are most important (top 10) for each algorithm. R code for the analysis is available in [explanation.R](). The result for random forest algorithm is included in the main test, and we present the result for other algorithms here.
+eFigure 5. 
+eFigrue 6.
+eFigure 7.
 
 [Back to top](#table-of-contents)
 
