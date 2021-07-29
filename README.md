@@ -689,32 +689,35 @@ Model calibration plots
 
 We present calibration plots for all calibrated algorithms we examined on the peri-COVID sample in this section. The plot for the random forest algorithm is included in our main paper.
 
-eFigure 2. Calibration plots for the multivariate logistice regression algorithm.
+eFigure 2. Calibration plot for the multivariate logistice regression algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537411-e0cd32ed-d0c1-4797-8f3f-2f54218f35de.png)
 
-**Note**: The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model are likely to underestimat the risk for patients with high ACU risk.
+**Note:** The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model are likely to underestimat the risk for patients with high ACU risk.
 
-eFigure 3. Calibration plots for the ECOG logistice regression algorithm.
+eFigure 3. Calibration plot for the ECOG logistice regression algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537556-40014b79-ea3a-4696-a84e-2db64535d159.png)
 
+**Note:** The lack of alignment bewteen the solid and dashe lines in most area indicates that the model is not well calibrated.
 
-
-eFigure 4. Calibration plots for the logistice regression with elastic net panelty algorithm.
+eFigure 4. Calibration plot for the logistice regression with elastic net penalty algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537090-e9ea0400-87f7-4baa-836c-e956d6d0a9fb.png)
 
+**Note:** The calibration anlysis result for the logistic regression with elastic net penalty algorithm is almost identical to the multivariate logistic regression, with the model outputs are more reliable for people with low to moderate (<=65%) ACU risk.
 
-eFigure 5. Calibration plots for the extreme gradient boosting trees algorithm.
+eFigure 5. Calibration plot for the extreme gradient boosting trees algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537728-2fd9d45b-ebf8-4854-a8a6-93e67d7ac32d.png)
 
+**Note:** The calibration of the extreme gradient boosting trees algorithm is suboptimal with tending to overestimate patients with low risk (<20%) and underestimate the risk for patients with moderate to high risk (>=30%).
 
-eFigure 6. Calibration plots for the single hidden layer neural network algorithm.
+eFigure 6. Calibration plot for the single hidden layer neural network algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537882-80710349-7e51-4eef-b448-91607d9aa3da.png)
 
+**Note:** The calibration plot suggests that the model generates reliabile outputs for patient with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
 
 [Back to top](#table-of-contents)
 
@@ -723,17 +726,21 @@ Variable importance plots
 
 We present the result for the random forest algorithm in our main paper and the rest ML algorithms here.
 
-eFigure 2. Important variables for logistic regression with elastic net penalty.
+eFigure 7. Important variables for logistic regression with elastic net penalty.
 
 ![image](https://user-images.githubusercontent.com/79476527/127511420-37ea9423-9f3e-480f-855c-0d7450e850a2.png)
 
-eFigure 3. Important variables for extreme gradient boosting trees.
+
+eFigure 8. Important variables for extreme gradient boosting trees.
 
 ![image](https://user-images.githubusercontent.com/79476527/127511133-5fc6a51d-57dd-47ae-a1af-d547c30031b0.png)
 
-eFigrue 4. Important variables for single hidden layer neural network.
+
+
+eFigrue 9. Important variables for single hidden layer neural network.
 
 ![image](https://user-images.githubusercontent.com/79476527/127511237-14eba026-e4f3-41c6-b1c2-305bd774ef20.png)
+
 
 [Back to top](#table-of-contents)
 
@@ -743,17 +750,20 @@ Shapely additive explanation plots
 
 The result for the random forest algorithm is included in the main test, and here are the results for other algorithms.
 
-eFigure 5. Contributions of predictor values to the prediction of the logistic regression with elastic net penalty algorithm for the randomly selected case.
+eFigure 10. Contributions of predictor values to the prediction of the logistic regression with elastic net penalty algorithm for the randomly selected case.
 
 ![image](https://user-images.githubusercontent.com/79476527/127511846-5fd65032-b88c-4733-95f1-c799ec785950.png)
 
-eFigrue 6. Contributions of predictor values to the prediction of the extreme gradient boosting trees algorithm for the randomly selected case.
+
+eFigrue 11. Contributions of predictor values to the prediction of the extreme gradient boosting trees algorithm for the randomly selected case.
 
 ![image](https://user-images.githubusercontent.com/79476527/127511884-a6f7d4a0-6396-4f58-aa91-1ca1120e6086.png)
 
-eFigure 7. Contributions of predictor values to the prediction of the single hidden layer neural network algorithm for the randomly selected case.
+
+eFigure 12. Contributions of predictor values to the prediction of the single hidden layer neural network algorithm for the randomly selected case.
 
 ![image](https://user-images.githubusercontent.com/79476527/127511867-1d527761-89fe-48a4-b198-f3e48133d8d2.png)
+
 
 
 [Back to top](#table-of-contents)
