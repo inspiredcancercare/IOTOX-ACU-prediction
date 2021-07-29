@@ -220,6 +220,7 @@ For variable importance, we used the permutation approach to determine the impor
 
 Another approach we used to explain our algorithms is an example-based explanation revealing model behavior on a particular instance of the peri-COVID sample. Specifically, we calculated Shapely values to determine the contributions of predictor values for a randomly selected instance in the sample to the model output. We focused on the predictors which are most important (top 10) for each algorithm. R code for the analysis is available in [explanation.R](). 
 
+
 [Back to top](#table-of-contents)
 
 Candidate predictors
@@ -682,6 +683,7 @@ Candidate predictors
 	</tbody>
 </table>
 
+
 [Back to top](#table-of-contents)
 
 Model calibration plots
@@ -689,35 +691,37 @@ Model calibration plots
 
 We present calibration plots for all calibrated algorithms we examined on the peri-COVID sample in this section. The plot for the random forest algorithm is included in our main paper.
 
-eFigure 2. Calibration plot for the multivariate logistice regression algorithm.
+eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537411-e0cd32ed-d0c1-4797-8f3f-2f54218f35de.png)
 
-**Note:** The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model are likely to underestimat the risk for patients with high ACU risk.
+**Note:** The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model is likely to underestimate the risk for patients with high ACU risk.
 
-eFigure 3. Calibration plot for the ECOG logistice regression algorithm.
+eFigure 3. Calibration plot for the ECOG logistic regression algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537556-40014b79-ea3a-4696-a84e-2db64535d159.png)
 
-**Note:** The lack of alignment bewteen the solid and dashe lines in most area indicates that the model is not well calibrated.
+**Note:** The lack of alignment between the solid and dash lines in most areas indicates that the model is not well calibrated.
 
-eFigure 4. Calibration plot for the logistice regression with elastic net penalty algorithm.
+eFigure 4. Calibration plot for the logistic regression with elastic net penalty algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537090-e9ea0400-87f7-4baa-836c-e956d6d0a9fb.png)
 
-**Note:** The calibration anlysis result for the logistic regression with elastic net penalty algorithm is almost identical to the multivariate logistic regression, with the model outputs are more reliable for people with low to moderate (<=65%) ACU risk.
+**Note:** The calibration analysis result for the logistic regression with elastic net penalty algorithm is almost identical to the multivariate logistic regression, with the model outputs are more reliable for people with low to moderate (<=65%) ACU risk.
 
 eFigure 5. Calibration plot for the extreme gradient boosting trees algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537728-2fd9d45b-ebf8-4854-a8a6-93e67d7ac32d.png)
 
-**Note:** The calibration of the extreme gradient boosting trees algorithm is suboptimal with tending to overestimate patients with low risk (<20%) and underestimate the risk for patients with moderate to high risk (>=30%).
+**Note:** The calibration of the extreme gradient boosting trees algorithm is suboptimal with tending to overestimate the risks for patients with low risk (<20%) and underestimate the risk for patients with moderate to high risk (>=30%).
 
 eFigure 6. Calibration plot for the single hidden layer neural network algorithm.
 
 ![image](https://user-images.githubusercontent.com/79476527/127537882-80710349-7e51-4eef-b448-91607d9aa3da.png)
 
-**Note:** The calibration plot suggests that the model generates reliabile outputs for patient with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+**Note:** The calibration plot suggests that the model generates reliable outputs for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+
+
 
 [Back to top](#table-of-contents)
 
@@ -742,7 +746,9 @@ eFigrue 9. Important variables for single hidden layer neural network.
 ![image](https://user-images.githubusercontent.com/79476527/127511237-14eba026-e4f3-41c6-b1c2-305bd774ef20.png)
 
 
+
 [Back to top](#table-of-contents)
+
 
 
 Shapely additive explanation plots
