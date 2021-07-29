@@ -7,9 +7,7 @@ Table of contents
    * [Model training and optimization](#model-training-and-optimization)
    * [Model calibration and risk threshold determination](#model-calibration-and-risk-threshold-determination)
    * [Model exmination and explanation](#model-exmination-and-explanation)
- * Candidate predictors used
- * Figures for variable importance analysis
- * Figures for Shapley additive explanation analysis
+ * [Candidate predictors](#candidate-predictors)
 <!--te-->
 
 eMethods
