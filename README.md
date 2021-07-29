@@ -6,7 +6,7 @@ Table of contents
    * [Data preparation](#data-preparation)
    * [Model training and optimization](#model-training-and-optimization)
    * [Model calibration and risk threshold determination](#model-calibration-and-risk-threshold-determination)
-   * [Model ] 
+   * [Model exmination and explanation](#model-exmination-and-explanation)
  * Candidate predictors used
  * Figures for variable importance analysis
  * Figures for Shapley additive explanation analysis
@@ -204,6 +204,19 @@ We provide our code for model calibration and risk threshold determination in [r
 
 eFigure 1. Sensitivity and specificity over acute care use risk thresholds from 0.001 to 1 for each algorithm
 ![image](https://user-images.githubusercontent.com/79476527/127394784-93f7fa17-5dcb-4ecc-92be-b4f3c1ed1e6b.png)
+
+
+[Back to top](#table-of-contents)
+
+Model exmination and explanation
+--------------------------------
+To examine model performance, we calculated performance metrics including area under the receiver operating charactistic curve (AUROC), accuracy, sensitivity, specificity, positive predictive value, negative predictive value, and confusion matrix for each model after calibration wth corresponding risk threshold. We caculated the metrics on the post-COVID testing and peri-COVID samples. We used McNamer's test to statistically compare our ML algorithms to two logistic regression-based models in terms of AUROC on both samples. We carried out the McNamer's test with 1000 boostrapping replications and an alpha level of 0.05. The code for performance examination and statisitcal comparison is available in [performance.R]()
+
+In addition to statistical examination, we used two model agnostic approaches, variable importance analysis and Shapley additive explanation, to provide additional insights into model behaviors and information potentially enabling individualized preventive intervention provision. We used [R DELAX package version 1.2.1](https://github.com/ModelOriented/DALEX) to reveal how our models utilized data to generate predictions for the peri-COVID sample. 
+
+For variable importance, we used the permuation approach to determine the importance of a predictor to an algorithm by measuring the prediction error fluctuations when randomly shuffling the predictor’s value. In this study, we use one minus AUROC as a founction to measure the prediction error. A predictor with a larger value of prediction error is more important to an algorithm. 
+
+Another approch we used to explain our algorithms is an example-based explanation revealing model behavior on a particular instances of the peri-COVID sample. Specifically, we calculated   
 
 
 [Back to top](#table-of-contents)
