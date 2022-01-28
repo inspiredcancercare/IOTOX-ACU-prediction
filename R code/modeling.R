@@ -39,8 +39,8 @@ set.seed(my_seed)
 lrenp_params<-model %>%
   parameters() %>%
   update(
-    penalty = penalty(range(c(-16L,0))),
-    mixture= mixture(range(c(0,1)))) %>%
+    penalty = penalty(range(c(-10L,0))),
+    mixture= mixture(range(c(0.05,1)))) %>%
   grid_max_entropy(size = 30)
 
 lrenp_workflow<-workflow() %>%
@@ -55,8 +55,8 @@ set.seed(my_seed)
 lrenp_params<-model %>%
   parameters() %>%
   update(
-    penalty = penalty(range(c(-16L,0))),
-    mixture= mixture(range(c(0,1))))
+    penalty = penalty(range(c(-10L,0))),
+    mixture= mixture(range(c(0.05,1))))
 
 
 lrenp_search <- model_tuning(lrenp_workflow, 
@@ -87,8 +87,8 @@ rf_params<-model %>%
   parameters() %>%
   update(
     mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
-    trees = trees(range(c(1L:4500L))),
-    min_n = min_n(range(c(2L:700L)))) %>%
+    trees = trees(range(c(1000L:2500L))),
+    min_n = min_n(range(c(10L:300L))))%>%
   grid_max_entropy(size = 30)
 
 rf_workflow<-workflow() %>%
@@ -104,9 +104,8 @@ rf_params<-model %>%
   parameters() %>%
   update(
     mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
-    trees = trees(range(c(1L:4500L))),
-    min_n = min_n(range(c(2L:700L))))
-
+    trees = trees(range(c(1000L:2500L))),
+    min_n = min_n(range(c(10L:300L))))
 
 rf_search <- model_tuning(rf_workflow, 
                           cvfolds, 
@@ -141,11 +140,11 @@ set.seed(my_seed)
 xgb_params<-model %>%
   parameters() %>%
   update(mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
-         trees = trees(range = c(1L, 4000L)),
-         min_n = min_n(range = c(2L, 75L)),
-         tree_depth = tree_depth(range = c(1L,150L)),
-         learn_rate = learn_rate(range = c(-17L,-1L)),
-         loss_reduction = loss_reduction(range = c(-17L, 1.5))) %>%
+            trees = trees(range = c(500L, 2500L)),
+            min_n = min_n(range = c(2L, 30L)),
+            tree_depth = tree_depth(range = c(5L,30L)),
+            learn_rate = learn_rate(range = c(-15L,-5L)),
+            loss_reduction = loss_reduction(range = c(-15L, -5L)))%>%
   grid_max_entropy(size = 30)
 
 xgb_workflow<-workflow() %>%
@@ -160,11 +159,11 @@ set.seed(my_seed)
 xgb_params<-model %>%
   parameters() %>%
   update(mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
-         trees = trees(range = c(1L, 4000L)),
-         min_n = min_n(range = c(2L, 75L)),
-         tree_depth = tree_depth(range = c(1L,150L)),
-         learn_rate = learn_rate(range = c(-17L,-1L)),
-         loss_reduction = loss_reduction(range = c(-17L, 1.5)))
+            trees = trees(range = c(500L, 2500L)),
+            min_n = min_n(range = c(2L, 30L)),
+            tree_depth = tree_depth(range = c(5L,30L)),
+            learn_rate = learn_rate(range = c(-15L,-5L)),
+            loss_reduction = loss_reduction(range = c(-15L, -5L)))
 
 xgb_search <- model_tuning(xgb_workflow, 
                            cvfolds, 
@@ -195,9 +194,9 @@ shlnn_model<-parsnip::mlp(hidden_units = tune(),
 set.seed(my_seed)
 shlnn_params<-model %>%
   parameters() %>%
-  update(hidden_units = hidden_units(range(c(1L,20L))),
-         penalty = penalty(range(c(-10L,2L))),
-         epochs = epochs(range(c(1L,1500L)))) %>%
+  update(hidden_units = hidden_units(range(c(1L,10L))),
+         penalty = penalty(range(c(-10L,0))),
+         epochs = epochs(range(c(1L,1000L)))) %>%
   grid_max_entropy(size = 30)
 
 shlnn_workflow<-workflow() %>%
@@ -211,9 +210,9 @@ shlnn_inital_search <- model_tuning_grid(shlnn_workflow,cvfolds, shlnn_params)
 set.seed(my_seed)
 shlnn_params<-model %>%
   parameters() %>%
-  update(hidden_units = hidden_units(range(c(1L,20L))),
-         penalty = penalty(range(c(-10L,2L))),
-         epochs = epochs(range(c(1L,1500L)))) 
+  update(hidden_units = hidden_units(range(c(1L,10L))),
+         penalty = penalty(range(c(-10L,0))),
+         epochs = epochs(range(c(1L,1000L)))) 
 
 shlnn_search <- model_tuning(shlnn_workflow, 
                              cvfolds, 
