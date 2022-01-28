@@ -211,7 +211,7 @@ After creating ML models, we use Platt scaling method to create a calibration mo
  
 To determine the risk threshold, we calculated sensitivity and specificity over risk thresholds from 0.001 to 1 using calibrated outputs on the pre-COVID testing sample for each algorithm. We selected the threshold which maximizes both sensitivity and specificity of each model. 
 
-We provide our code for model calibration and risk threshold determination in [reclassified.R]()
+We provide our code for model calibration and risk threshold determination in [reclassified.R](https://github.com/inspiredcancercare/IOTOXACU/blob/main/R%20code/reclassification.R)
 
 
 <p align="center">
