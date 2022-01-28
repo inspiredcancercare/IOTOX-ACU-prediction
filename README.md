@@ -30,7 +30,7 @@ We applied the following data preparation techniques to prepare the data before 
 		<dd>- One-hot encoding to convert each predictor into a binary term for each class of the original data</dd>
 		<dd>- Missing data imputation using mode of each predictor </dd>
   <li>All predictors</li>
-	<dd>- Removing predictors that contain only a single value or have most observations with the same value</dd>
+	<dd>- Removing predictors that contain only a single value or have most traning sample with the same value</dd>
 	<dd>- Removing predictors that have large absolute correlations (>=0.90) with other predictors </dd>
 </ul>
 
