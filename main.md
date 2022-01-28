@@ -1,5 +1,5 @@
 	Online supplementary materials and code repository
-# Pragmatic Machine learning algorithms offer robust and interpretable predictions of 90-day unplanned acute care use for cancer immunotherapy patients 
+# Machine learning algorithms using routinely collected clinical data offer robust and interpretable predictions of 90-day unplanned acute care use for cancer immunotherapy
 	
 Table of contents
 =================
