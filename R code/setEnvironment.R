@@ -1,6 +1,6 @@
 #### setting up environment ####
 packages<-c("dplyr","tidymodels", "recipes",
-            "forcats","stringr",
+            "forcats","stringr","DALEXtra",
             "glmnet", "ranger","xgboost","nnet",
             "pROC", "lattice","DALEX","ggplot2",
             "ggplotify","gridExtra","factoextra"
