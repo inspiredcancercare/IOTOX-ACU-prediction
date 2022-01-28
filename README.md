@@ -705,14 +705,14 @@ We present calibration plots for all calibrated algorithms we examined on the pe
 
 
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537411-e0cd32ed-d0c1-4797-8f3f-2f54218f35de.png">
+  <img width="460" height="400" src="">
 </p>
 eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
 
 **Note:** The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model is likely to underestimate the risk for patients with high ACU risk.
 
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537556-40014b79-ea3a-4696-a84e-2db64535d159.png">
+  <img width="460" height="400" src="">
 </p>
 
 eFigure 3. Calibration plot for the ECOG logistic regression algorithm.
@@ -721,7 +721,7 @@ eFigure 3. Calibration plot for the ECOG logistic regression algorithm.
 
 <p align="center">
 
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/38151091/151475184-4cdf832a-b6ad-4805-b588-5e854410568a.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151475184-4cdf832a-b6ad-4805-b588-5e854410568a.png">
 </p>
 
 eFigure 4. Calibration plot for the ranfom forest algorithm.
@@ -729,7 +729,7 @@ eFigure 4. Calibration plot for the ranfom forest algorithm.
 **Note:** The calibration analysis result for the random forest is suboptimal. The model tends to overestimate the risk for patients with low risk (20%) and underestimate the rsik for patients with moderate to high risk of ACU (>=50%).
 
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/38151091/151476847-c03ee632-09e7-4c88-b0ef-eb51afec0269.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151476847-c03ee632-09e7-4c88-b0ef-eb51afec0269.png">
 </p>
 
 eFigure 5. Calibration plot for the extreme gradient boosting tree algorithm.
@@ -737,7 +737,7 @@ eFigure 5. Calibration plot for the extreme gradient boosting tree algorithm.
 **Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 50%). The model is unstable for patients in high risk area (>50%).
 
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/38151091/151476988-1777145e-a82e-4778-82a4-175e1ccede0a.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151476988-1777145e-a82e-4778-82a4-175e1ccede0a.png">
 </p>
 
 eFigure 6. Calibration plot for the single hidden layer neural network algorithm.
@@ -753,19 +753,19 @@ Variable importance plots
 We present the result for the LRENP algorithm in our main paper and the rest ML algorithms here.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/38151091/151477070-b7e2ffea-d128-4b41-8a41-0c1b309fd8e1.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477070-b7e2ffea-d128-4b41-8a41-0c1b309fd8e1.png">
 </p>
 
 eFigure 7. Important variables for the random forest algorithm.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/38151091/151477159-d51cdd9e-5b90-4607-8748-f0c8bea38855.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477159-d51cdd9e-5b90-4607-8748-f0c8bea38855.png">
 </p>
 
 eFigure 8. Important variables for the extreme gradient boosting trees algorithm.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/38151091/151477347-0608af07-5c35-4bb7-a32a-c063b5ba17cb.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477347-0608af07-5c35-4bb7-a32a-c063b5ba17cb.png">
 </p>
 
 eFigrue 9. Important variables for the single hidden layer neural network algorithm.
@@ -778,25 +778,25 @@ eFigrue 9. Important variables for the single hidden layer neural network algori
 Shapely additive explanation plots
 --------------------------
 
-The result for the RF algorithm is included in the main test, and here are the results for other algorithms.
+The result for the LRENP algorithm is included in the main test, and here are the results for other algorithms.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79476527/127511846-5fd65032-b88c-4733-95f1-c799ec785950.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151478003-b6261d25-aa85-446d-9c1b-e5c9be3c86d5.png">
 </p>
 
-eFigure 10. Contributions of predictor values to the prediction of the LRENP algorithm for the randomly selected case.
+eFigure 10. Contributions of predictor values to the prediction of the random forest algorithm for the randomly selected case.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79476527/127511884-a6f7d4a0-6396-4f58-aa91-1ca1120e6086.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477936-1214a44f-0ff5-4548-9e14-e93dd63cb9e9.png">
 </p>
 
-eFigrue 11. Contributions of predictor values to the prediction of the XGBT algorithm for the randomly selected case.
+eFigrue 11. Contributions of predictor values to the prediction of the extreme gradient boosting trees algorithm for the randomly selected case.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79476527/127511867-1d527761-89fe-48a4-b198-f3e48133d8d2.png">
+  <img width="460" height="400"  src="https://user-images.githubusercontent.com/38151091/151478076-1a389c00-f0bc-412f-b100-046a6250a6bc.png">
 </p>
 
-eFigure 12. Contributions of predictor values to the prediction of the SHLNN algorithm for the randomly selected case.
+eFigure 12. Contributions of predictor values to the prediction of the single hidden layer neural network  algorithm for the randomly selected case.
 
 
 
