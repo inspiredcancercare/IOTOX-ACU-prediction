@@ -269,7 +269,7 @@ Candidate predictors
 			<td> 0 - 99, GQ, GQ-PH, KVM, PH </td>
 		    </tr>
 	<tr>
-	    	<td rowspan=8>Treatment</td>
+	    	<td rowspan= 6 >Treatment</td>
 		<td> RT 30 days before </td>
 		<td> True, False </td>
 	    </tr>
@@ -287,14 +287,6 @@ Candidate predictors
 		    </tr>
 	    	<tr>
 			<td> Durvalumab </td>
-			<td> True, False </td>
-		    </tr>
-	   	<tr>
-			<td> Ipilimumab </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Nivolumab </td>
 			<td> True, False </td>
 		    </tr>
 	    	<tr>
@@ -669,10 +661,6 @@ Candidate predictors
 			<td> Numeric </td>
 		    </tr>
 	    	<tr>
-			<td> PTT </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
 			<td> Phosphorus </td>
 			<td> Numeric </td>
 		    </tr>
@@ -682,10 +670,6 @@ Candidate predictors
 		    </tr>
 	    	<tr>
 			<td> TSH </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Uric Acid </td>
 			<td> Numeric </td>
 		    </tr>
 	</tbody>
