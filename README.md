@@ -701,7 +701,7 @@ Candidate predictors
 Model calibration plots
 -----------------------
 
-We present calibration plots for all calibrated algorithms we examined on the peri-COVID sample in this section. The plot for the RF algorithm is included in our main paper.
+We present calibration plots for all calibrated algorithms we examined on the peri-COVID sample in this section. The plot for the LRENP algorithm is included in our main paper.
 
 
 <p align="center">
@@ -720,28 +720,29 @@ eFigure 3. Calibration plot for the ECOG logistic regression algorithm.
 **Note:** The lack of alignment between the solid and dash lines in most areas indicates that the model is not well calibrated.
 
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537090-e9ea0400-87f7-4baa-836c-e956d6d0a9fb.png">
+
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/38151091/151475184-4cdf832a-b6ad-4805-b588-5e854410568a.png">
 </p>
 
-eFigure 4. Calibration plot for the LRENP algorithm.
+eFigure 4. Calibration plot for the ranfom forest algorithm.
 
-**Note:** The calibration analysis result for the logistic regression with elastic net penalty algorithm is almost identical to the multivariate logistic regression, with the model outputs are more reliable for people with low to moderate (<=65%) ACU risk.
+**Note:** The calibration analysis result for the random forest is suboptimal. The model tends to overestimate the risk for patients with low risk (20%) and underestimate the rsik for patients with moderate to high risk of ACU (>=50%).
 
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537728-2fd9d45b-ebf8-4854-a8a6-93e67d7ac32d.png">
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/38151091/151476847-c03ee632-09e7-4c88-b0ef-eb51afec0269.png">
 </p>
 
-eFigure 5. Calibration plot for the XGBT algorithm.
+eFigure 5. Calibration plot for the extreme gradient boosting tree algorithm.
 
-**Note:** The calibration of the extreme gradient boosting trees algorithm is suboptimal with tending to overestimate the risks for patients with low risk (<20%) and underestimate the risk for patients with moderate to high risk (>=30%).
+**Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 50%). The model is unstable for patients in high risk area (>50%).
 
 <p align="center">
-  <img width="460" height="460" src="https://user-images.githubusercontent.com/79476527/127537882-80710349-7e51-4eef-b448-91607d9aa3da.png">
+  <img width="460" height="460" src="https://user-images.githubusercontent.com/38151091/151476988-1777145e-a82e-4778-82a4-175e1ccede0a.png">
 </p>
 
-eFigure 6. Calibration plot for the SHLNN algorithm.
+eFigure 6. Calibration plot for the single hidden layer neural network algorithm.
 
-**Note:** The calibration plot suggests that the model generates reliable outputs for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+**Note:** The calibration plot suggests that the model generates reliable outputs only for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
 
 
 [Back to top](#table-of-contents)
@@ -749,25 +750,25 @@ eFigure 6. Calibration plot for the SHLNN algorithm.
 Variable importance plots
 --------------------------
 
-We present the result for the RF algorithm in our main paper and the rest ML algorithms here.
+We present the result for the LRENP algorithm in our main paper and the rest ML algorithms here.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79476527/127511420-37ea9423-9f3e-480f-855c-0d7450e850a2.png">
+  <img src="https://user-images.githubusercontent.com/38151091/151477070-b7e2ffea-d128-4b41-8a41-0c1b309fd8e1.png">
 </p>
 
-eFigure 7. Important variables for LRENP.
+eFigure 7. Important variables for the random forest algorithm.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79476527/127511133-5fc6a51d-57dd-47ae-a1af-d547c30031b0.png">
+  <img src="https://user-images.githubusercontent.com/38151091/151477159-d51cdd9e-5b90-4607-8748-f0c8bea38855.png">
 </p>
 
-eFigure 8. Important variables for XGBT.
+eFigure 8. Important variables for the extreme gradient boosting trees algorithm.
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79476527/127511237-14eba026-e4f3-41c6-b1c2-305bd774ef20.png">
+  <img src="https://user-images.githubusercontent.com/38151091/151477347-0608af07-5c35-4bb7-a32a-c063b5ba17cb.png">
 </p>
 
-eFigrue 9. Important variables for SHLNN.
+eFigrue 9. Important variables for the single hidden layer neural network algorithm.
 
 
 [Back to top](#table-of-contents)
