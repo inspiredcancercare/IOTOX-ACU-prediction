@@ -2,6 +2,8 @@
 # Machine learning (ML) technique overview 
 
 In this page, we briefly introduce each ML algorithm and model interpretation technique that are using in the study.   
+ 
+<br></br>
 
 Machine learning algorithm overview 
 ==========================================================
@@ -30,7 +32,7 @@ Artificial neural networks that solve problems via loosely simulating the way th
 y = activation (Σ(weight × input) + bias)
 
  
-
+<br></br>
 
 Model interpretation techniques 
 ========================================
@@ -40,4 +42,30 @@ The PVI provides a compressed insight into model’s behavior. However, the PVI 
 
 The ALE is an expansion of partial dependence plots (PDP) which estimate the relationships between model output and predictors of interest.<sup>10</sup> The ALE uses conditional distribution to avoid counting data points that are not possible in the real world, making it a robust method for estimating predictors’ effects in a highly inter-correlated dataset. For categorical predictors, the ALE estimates the average predicted positive probabilities for each category of the predicters. For numerical predictors, the ALE demonstrates relationships, e.g., linear, monotonic, or more complex, between values of the predictors and predicted positive probabilities on average. In this study, we examined the ALE for predictors that were deemed important for four or more models by the PFI. We averaged the ALE from different ML models for each important predictor to estimate each predictor’s final ALE. All model interpretation methods were performed using the R ‘DALEXtra’ package.<sup>11</sup>
 
+# In addition to ALE providing -----to be complete for SHAP
  
+<br></br>
+
+References
+=====================
+1. Sidey-Gibbons JAM, Sidey-Gibbons CJ. Machine learning in medicine: a practical introduction. BMC Med Res Methodol. 2019;19(1):1–18.  
+
+2. Sidey-Gibbons C, Asaad M, Pfob A, Boukovalas S, Lin Y-L, Offodile A. Machine learning algorithms to predict financial toxicity associated with breast cancer treatment. J Clin Oncol. 2020 May 20;38(15_suppl):2047.  
+
+3. Pal M. Random forest classifier for remote sensing classification. Int J Remote Sens. 2005 Jan 22;26(1):217–22.  
+
+4. Medic G, Kließ MK, Atallah L, Weichert J, Panda S, Postma M, et al. Evidence-based clinical decision support systems for the prediction and detection of three disease states in critical care: a systematic literature review. F1000Research. 2019;8(1728).  
+
+5. Xu Y, Yang X, Huang H, Peng C, Ge Y, Wu H, et al. Extreme gradient boosting model has a better performance in predicting the risk of 90-day readmissions in patients with ischaemic stroke. J Stroke Cerebrovasc Dis. 2019;28(12):104441.  
+
+6. Manz C, Chivers C, Liu MQ, Regli SB, Changolkar S, Evans CN, et al. Prospective validation of a machine learning algorithm to predict short-term mortality among outpatients with cancer. J Clin Oncol. 2020;38(15).  
+
+7. Iivanainen S, Ekström J, Virtanen H, Koivunen J. Predicting onset and continuity of patient-reported symptoms in patients receiving immune checkpoint inhibitor (ICI) therapies using machine learning. Arch Clin Med Case Reports. 2020;04(03):344–51.  
+
+8. Heldt FS, Vizcaychipi MP, Peacock S, Cinelli M, McLachlan L, Andreotti F, et al. Early risk assessment for COVID-19 patients from emergency department data using machine learning. Sci Rep. 2021;11(1):1–13. 
+
+9. Zhang M, Yin F, Chen B, Li B, Li YP, Yan LN, et al. Mortality risk after liver transplantation in hepatocellular carcinoma recipients: a nonlinear predictive model. Surgery. 2012;151(6):889–97.  
+
+10. Molnar C. Interpretable machine learning: a guide for making black box models explainable [Internet]. 2020. Available from: https://christophm.github.io/interpretable-ml-book/ 
+
+11. Maksymiuk S, Biecek P. DALEXtra: extension for “DALEX” package. 2020. Available from: https://cran.r-project.org/package=DALEXtra 
