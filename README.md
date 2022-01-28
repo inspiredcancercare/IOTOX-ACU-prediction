@@ -29,8 +29,9 @@ We applied the following data preparation techniques to prepare the data before 
 		<dd>- Lumping classes occurring in fewer than 10% of the training sample to an “Other” category for each predictor to reduce data complexity</dd>
 		<dd>- One-hot encoding to convert each predictor into a binary term for each class of the original data</dd>
 		<dd>- Missing data imputation using mode of each predictor </dd>
-  <li>Ordinal predictors</li>
-	<li>All predictors</li>
+  <li>All predictors</li>
+	<dd>- Removing predictors that contain only a single value or have most observations with the same value</dd>
+	<dd>- Removing predictors that have large absolute correlations (>=0.90) with other predictors </dd>
 </ul>
 
 We carried out all data preparation steps using the [R recipes package version 0.1.16](https://cran.r-project.org/web/packages/recipes/recipes.pdf) with the following code after setting up the environment with necessary R packages using our [setEnvironment.R](https://github.com/inspiredcancercare/IOTOXACU/blob/ebd8db31e69fc480140ba78161109068a5273abe/setEnvironment.R).
@@ -112,64 +113,64 @@ We used [R tidymodels package version 0.1.0](https://www.tidymodels.org/) to dev
             	<td rowspan=2>LRENP</td>
 	    	<td> penalty</td>
 		<td> 10^-16 ~ 10^0 </td>
-		<td> 0.00000000159 </td>
+		<td> 0.0766 </td>
             </tr>
         <tr>
 		<td> mixture </td>
 		<td> 0 - 1 </td>
-		<td> 0.00437 </td>
+		<td> 0.0624 </td>
             </tr>
 	<tr>
 	    	<td rowspan=3>RF</td>
 		<td> mtry </td>
-		<td> 1 - 81 </td>
-		<td> 73 </td>
+		<td> 1 - 83 </td>
+		<td> 1 </td>
 	    </tr>
 	<tr>
 		<td> trees </td>
-		<td> 500 - 4500 </td>
-		<td> 1138 </td>
+		<td> 1 - 4500 </td>
+		<td> 1500 </td>
 	    </tr>
 	<tr>
 		<td> min_n </td>
 		<td> 2 - 700 </td>
-		<td> 490 </td>
+		<td> 291 </td>
 	    </tr>
         <tr>
 		<td rowspan=7>XGBT</td>
 		<td> mtry </td>
-		<td> 1 - 81 </td>
-		<td> 27 </td>
+		<td> 1 - 83 </td>
+		<td> 8 </td>
         </tr>
 	<tr>
 		<td> trees </td>
 		<td> 1 - 4000 </td>
-		<td> 472 </td>
+		<td> 1003 </td>
 	    </tr>
 	<tr>
 		<td> min_n </td>
-		<td> 2 - 75 </td>
-		<td> 4 </td>
+		<td> 1 - 75 </td>
+		<td> 11 </td>
 	    </tr>
 	<tr>
 		<td> tree_depth </td>
 		<td> 1 - 150 </td>
-		<td> 13 </td>
+		<td> 14 </td>
 	    </tr>
 	 <tr>
 		<td> learn_rate </td>
 		<td> 10^-17 - 10^-1 </td>
-		<td> 0.000596 </td>
+		<td> 0.000000014 </td>
 	    </tr>
 	 <tr>
 		<td> loss_reduction </td>
 		<td> 10^-17 - 10^1.5 </td>
-		<td> 0.00000195 </td>
+		<td> 0.0000000000154 </td>
 	    </tr> 
 	<tr>
 		<td> sample_size </td>
 		<td> 0.1 - 1 </td>
-		<td> 0.916 </td>
+		<td> 0.763 </td>
 	    </tr> 
         <tr>
 		<td rowspan=3>SHLNN</td>
@@ -211,7 +212,7 @@ We provide our code for model calibration and risk threshold determination in [r
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/79476527/127394784-93f7fa17-5dcb-4ecc-92be-b4f3c1ed1e6b.png">
+  <img src="https://user-images.githubusercontent.com/38151091/151495525-e722ce4d-fa2f-4ab8-b449-130596b267cd.png">
 </p>
 
 eFigure 1. Sensitivity and specificity over acute care use risk thresholds from 0.001 to 1 for each algorithm
@@ -685,14 +686,15 @@ We present calibration plots for all calibrated algorithms we examined on the pe
 
 
 <p align="center">
-  <img width="460" height="400" src="">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151495478-3189023e-78d6-4945-87e6-0b5cf6db7bae.png">
+
 </p>
 eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
 
 **Note:** The multivariate logistic regression model is well calibrated for patients with low to moderate risk of ACU. The model is likely to underestimate the risk for patients with high ACU risk.
 
 <p align="center">
-  <img width="460" height="400" src="">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151495499-6a0fb6cb-dd86-4bf9-9026-c97dd0aefeb2.png">
 </p>
 
 eFigure 3. Calibration plot for the ECOG logistic regression algorithm.
