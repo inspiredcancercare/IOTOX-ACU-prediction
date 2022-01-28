@@ -305,6 +305,49 @@ thres = seq(from = 0.1, to = 1 , by = 0.001)
 positive = "TRUE"
 negative = "FALSE"
 
+#function determining the threshold maximizing the given performance metric(s) 
+metricOverCutoff<-function(probability = NULL, reference=NULL, positive ="TRUE", negative = "FALSE", metrics =NULL, threshold=c(0.01, 1, 0.05)){
+  db <- data.frame(threshold=numeric(),
+                   metric=character(),
+                   estimate=numeric()) %>% as_tibble()
+  #print(metrics)
+  for(i in threshold){
+      #print(paste("thres:", i))
+    class <- as.factor(ifelse(probability >= i, positive, negative))
+    if(length(levels(class))==1){
+        #print("relevel class")
+      if(levels(class)==positive){
+        levels(class)= c(positive, negative)
+        class = ordered(class, levels = levels(as.factor(as.character(reference))))
+       #print("releveled class")
+        #print(class)
+      } else{
+        levels(class)= c(negative,positive)
+        class = ordered(class, levels = levels(as.factor(as.character(reference))))
+      }
+    }
+    cm <- confusionMatrix(class,
+      as.factor(as.character(reference)), positive = positive)
+    for (x in metrics){
+      es<- switch( x,
+        "sensitivity" = round(cm$byClass[[1]],2),
+        "specificity" = round(cm$byClass[[2]],2),
+        "accuracy" = round(cm$overall[[1]],2),
+        "kappa" = round(cm$overall[[2]],2),
+        "ppv" = round(cm$byClass[[3]],2),
+        "npv" = round(cm$byClass[[4]],2),
+        "precision" = round(cm$byClass[[5]],2),
+        "recall" = round(cm$byClass[[6]],2),
+        "f1" = round(cm$byClass[[7]],2),
+        "j_index" = round((cm$byClass[[1]] + cm$byClass[[2]])-1,2),
+        "distance" = round((1 - cm$byClass[[1]]) ^ 2 + (1 - cm$byClass[[2]]) ^ 2,2)
+        )
+      db<-db %>% bind_rows(tibble(threshold = as.numeric(i),metric =  as.character(x), estimate = as.numeric(es)))
+    }
+  }
+   return(db)
+}
+
 #logistic regression 
 lr_thres<-metricOverCutoff(lr_predictions[,"cali_pred_TRUE"], 
                            lr_predictions[,outcome], 
