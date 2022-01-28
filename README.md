@@ -44,18 +44,14 @@ predictors<-names(df_train)
 formula<-as.formula(paste(outcome, paste(predictors, collapse = "+"), sep="~"))
 print("formula:")
 print(formula)
-log_trans_variable<- c("l_AST", "l_ALT",  "l_Alk_Phos", "l_BUN", "l_Basophil_Abs",
-                       "l_Basophil_pct", "l_Chloride", "l_Creatinine", "l_Eosinophil_pct",
-                       "l_Eosinophil_Abs", "l_Platelet", "l_Glucose_Lvl", "l_IGRE_pct",
-                       "l_LDH", "l_Lymphocyte_Abs", "l_Lymphocyte_pct", 
-                       "l_Monocyte_Abs", "l_Monocyte_pct", "l_Neutrophil_Abs",
-                       "l_Neutrophil_pct", "l_RBC","l_RDW_CV", "l_RDW_SD", 
-                       "l_eGFR_AA", "l_creatinine_clear", "l_Bili_Direct", 
-                       "l_Bili_Indirect",  "l_Bili_Total", "l_IG_Abs",
-                       "l_INR", "l_INRBC", "l_PT", "l_PTT", "l_TSH","l_T4_Free", 
-                       "l_WBC","v_spo2","v_resp")
+log_trans_variable<- c("lab_AST","lab_ALT","lab_ALK_Phos","lab_BUN","lab_Basophilab_Abs", "lab_Basophilab_pct",
+	"lab_Chloride", "lab_Creatinine", "lab_Eosinophilab_pct","lab_Eosinophilab_Abs","lab_Platelet", 
+	"lab_Glucose_Lvl", "lab_IGRE_pct",  "lab_LDH", "lab_Lymphocyte_Abs", "lab_Lymphocyte_pct", "lab_Monocyte_Abs",
+	"lab_Neutrophilab_Abs",  "lab_Neutrophilab_pct","lab_RBC","lab_RDW_CV", "lab_RDW_SD", "lab_eGFR_AA", 
+	"lab_creatinine_clear",   "lab_Bili_Direct", "lab_Bili_Indirect", "lab_Bili_Total","lab_IG_Abs","lab_INR",
+	"lab_INRBC", "lab_PT","lab_TSH", "lab_WBC","vit_pulse","vit_BMI","vit_spo2","vit_resp")
 
-ordinal_varaible<-c("v_pain","ecog_latest", "ADI_NATRANK")
+ordinal_varaible<-c("vit_pain","ecog_latest", "ADI_NATRANK")
 
 ##### split data into training and testing samples ####
 set.seed(my_seed)
@@ -67,9 +63,9 @@ df_test<-testing(split)
 df_recipe<-recipe(formula, df_train) %>%
   step_medianimpute(all_numeric(), -recipes::all_outcomes()) %>%
   step_modeimpute(all_nominal(), -recipes::all_outcomes()) %>%
-  step_log(!!log_trans_variable, offset = 1) %>%
-  step_YeoJohnson(l_Anion_Gap) %>%
-  step_other(marital_status, smoking, threshold = 0.1, other = "other") %>% 
+  step_log(!!!syms(log_trans_variable), offset = 1) %>%
+  step_YeoJohnson(lab_Anion_Gap) %>%
+  step_other(marital, smoke, threshold = 0.1, other = "other") %>% 
   step_integer(!!ordinal_varaible) %>%
   step_normalize(all_numeric(),-!!ordinal_varaible,-recipes::all_outcomes()) %>%
   step_zv(all_predictors(),-recipes::all_outcomes()) %>%
@@ -80,7 +76,7 @@ df_recipe<-recipe(formula, df_train) %>%
 #### Create resample ####
 set.seed(my_seed)
 cvfolds<-vfold_cv(df_train, v = 10, strata = outcome)
-write_rds_file(cvfolds,"cvfolds.RDS")
+
 ```
 
  [back to top](#table-of-contents)
