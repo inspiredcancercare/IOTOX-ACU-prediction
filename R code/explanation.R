@@ -1,27 +1,38 @@
 #### Model agnostic explanations ######
 pred_wrapper<-  function(object, newdata)  {
-  name<-object$spec$engine
-  cali<-switch(name,
-               "glmnet" = lrenp_calibrate_model,
-               "ranger" = rf_calibrate_model,
-               "xgboost"= xgb_calibrate_model,
-               "nnet" = shlnn_calibrate_model
-  )
-  #print(cali)
-  pred <- predict(object, newdata, type = "prob")
-  uncali_pred <- data.frame(Pred = pred$.pred_TRUE)
-  response <- predict(cali, uncali_pred, type = "response")
-  return(response)
-}
+        name<-object$fit$actions$model$spec$engine
+        #print(name)
+         cali<-switch(name,
+                "glmnet" = calibration$glm,
+                "earth" = calibration$mars,
+                "rpart" = calibration$dt,
+                "xgboost"= calibration$gbm,
+                "nnet" = calibration$shlnn,
+                "kernlab"= calibration$svm,
+                "ranger" = calibration$rf,
+                "kknn"= calibration$knn)
+        #print(cali)
+        pred <- predict(object, newdata, type = "prob")
+        #print(pred)
+        uncali_pred <- data.frame(Pred = pred$.pred_TRUE)
+        response <- predict(cali, uncali_pred, type = "response")
+        #print(response)
+        return(response)
+    }   
 
 set.seed(my_seed)
-df_periCOVID_bake <- bake(prep(recipe, df_train), df_periCOVID) 
+df_periCOVID_explain_prep<-recipe(formula, df_periCOVID) %>%
+  step_medianimpute(all_numeric(), -recipes::all_outcomes()) %>%
+  step_modeimpute(all_nominal(), -recipes::all_outcomes()) %>%
+  prep()
+
+df_periCOVID_bake <- bake(df_periCOVID_explain_prep, df_periCOVID) %>% as.data.frame()
 
 #Creat expainer for each algo
 #Logistic regression with elastic net penalty
-lrenp_model_fit <- lrenp_finalworkflow %>% pull_workflow_fit() 
+lrenp_model_fit <- lrenp_finalworkflow
 
-lrenp_explainer<-DALEX::explain(
+lrenp_explainer<-DALEXtra::explain_tidymodels(
   model= lrenp_model_fit,
   data = dplyr::select(df_periCOVID_bake,-outcome),
   y = as.vector(as.numeric(ifelse(df_periCOVID_bake[,outcome]=="TRUE",1,0))),
@@ -29,9 +40,9 @@ lrenp_explainer<-DALEX::explain(
   label = "Logistic regression with elastic net penalty")
 
 #Randpm forest
-rf_model_fit <- rf_finalworkflow %>% pull_workflow_fit() 
+rf_model_fit <- rf_finalworkflow
 
-rf_explainer<-DALEX::explain(
+rf_explainer<-DALEXtra::explain_tidymodels(
   model= rf_model_fit,
   data = dplyr::select(df_periCOVID_bake,-outcome),
   y = as.vector(as.numeric(ifelse(df_periCOVID_bake[,outcome]=="TRUE",1,0))),
@@ -39,9 +50,9 @@ rf_explainer<-DALEX::explain(
   label = "Random forest")
 
 #Extreme gradient boosting trees
-xgb_model_fit <- xgb_finalworkflow %>% pull_workflow_fit() 
+xgb_model_fit <- xgb_finalworkflow
 
-xgb_explainer<-DALEX::explain(
+xgb_explainer<-DALEXtra::explain_tidymodels(
   model= xgb_model_fit,
   data = dplyr::select(df_periCOVID_bake,-outcome),
   y = as.vector(as.numeric(ifelse(df_periCOVID_bake[,outcome]=="TRUE",1,0))),
@@ -49,9 +60,9 @@ xgb_explainer<-DALEX::explain(
   label = "Extreme graident boosting trees")
 
 #Single hidden layer neural network
-shlnn_model_fit <- shlnn_finalworkflow %>% pull_workflow_fit() 
+shlnn_model_fit <- shlnn_finalworkflow
 
-shlnn_explainer<-DALEX::explain(
+shlnn_explainer<-DALEXtra::explain_tidymodels(
   model= shlnn_model_fit,
   data = dplyr::select(df_periCOVID_bake,-outcome),
   y = as.vector(as.numeric(ifelse(df_periCOVID_bake[,outcome]=="TRUE",1,0))),
@@ -77,8 +88,8 @@ loss_auc <- function(observed, predicted){
 attr(loss_auc, "loss_name") <- "One minus AUC"
 
 #Logistic regression with elastic net penalty
-lrenp_vi<-DALEX::model_parts(lrenp_explainer,
-                            loss_function = loss_auc,
+lrenp_vi<-variable_importance(lrenp_explainer,
+                            #loss_function = loss_auc,
                             type="variable_importance") 
 
 lrenp_vip <- plot(lrenp_vi, 
@@ -104,8 +115,8 @@ lrenp_vip <- plot(lrenp_vi,
         axis.title.y = element_text(colour = "black"))
 
 #Random forest
-rf_vi<-DALEX::model_parts(rf_explainer,
-                             loss_function = loss_auc,
+rf_vi <- variable_importance(rf_explainer,
+                             #loss_function = loss_auc,
                              type="variable_importance") 
 
 rf_vip <- plot(rf_vi, 
@@ -131,8 +142,8 @@ rf_vip <- plot(rf_vi,
         axis.title.y = element_text(colour = "black"))
 
 #Extreme gradient boosting trees
-xgb_vi<-DALEX::model_parts(xgb_explainer,
-                             loss_function = loss_auc,
+xgb_vi<-variable_importance(xgb_explainer,
+                             #loss_function = loss_auc,
                              type="variable_importance") 
 
 xgb_vip <- plot(xgb_vi, 
@@ -158,8 +169,8 @@ xgb_vip <- plot(xgb_vi,
         axis.title.y = element_text(colour = "black"))
 
 #Single hidden layer neural network
-shlnn_vi<-DALEX::model_parts(shlnn_explainer,
-                             loss_function = loss_auc,
+shlnn_vi<-variable_importance(shlnn_explainer,
+                             #loss_function = loss_auc,
                              type="variable_importance") 
 
 shlnn_vip <- plot(shlnn_vi, 
@@ -184,34 +195,6 @@ shlnn_vip <- plot(shlnn_vi,
         axis.title.x = element_text(colour = "black"),
         axis.title.y = element_text(colour = "black"))
 
-
-#### Shapely additive explanation analysis ####
-####Plotting variable importance####
-lrenp_vi<-variable_importance(lrenp_explainer,type="raw")
-
-plot(lrenp_vi, max_vars = 10, show_boxplots =FALSE, subtitle="")+
-  ggtitle("")+
-  ylab("1-AUC")
-
-rf_vi<-variable_importance(rf_explainer,type="raw")
-
-plot(rf_vi, max_vars = 10, show_boxplots =FALSE, subtitle="")+
-  ggtitle("")+
-  ylab("1-AUC")
-
-xgb_vi<-variable_importance(xgb_explainer,type="raw") 
-
-plot(xgb_vi, max_vars = 10, show_boxplots =FALSE, subtitle="")+
-  ggtitle("")+
-  ylab("1-AUC")
-
-shlnn_vi<-variable_importance(shlnn_explainer,type="raw")
-
-plot(shlnn_vi, max_vars = 10, show_boxplots =FALSE, subtitle="")+
-  ggtitle("")+
-  ylab("1-AUC")
-
-
 ####Shapley additive explanation analysis####
 set.seed(my_seed)
 num_case<- 1
@@ -219,7 +202,7 @@ case_id <- sample(1:nrow(df_periCOVID), num_case)
 obs<- df_periCOVID[case_id,]
 
 set.seed(my_seed)
-obs<-bake(df_prep, obs)%>% as.data.frame()
+obs<-bake(df_periCOVID_explain_prep, obs)%>% as.data.frame()
 
 #logistic regression with elastic net penalty
 lrenp_important_variable<-lrenp_vi %>% 
