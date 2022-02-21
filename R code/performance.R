@@ -206,63 +206,55 @@ shlnn_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
 #lrenp vs lr
 roc.test(obs_class, data.frame(lrenp_predictions$cali_pred_TRUE,
                                lr_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 
 roc.test(obs_class_periCOVID, data.frame(lrenp_predictions_periCOVID$cali_pred_TRUE,
                                lr_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 #rf vs lr
 roc.test(obs_class, data.frame(rf_predictions$cali_pred_TRUE,
                                lr_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(rf_predictions_periCOVID$cali_pred_TRUE,
                                lr_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 #xgb vs lr
 roc.test(obs_class, data.frame(xgb_predictions$cali_pred_TRUE,
                                lr_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(xgb_predictions_periCOVID$cali_pred_TRUE,
                                lr_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
-         alternative = "two.sided", 
-         boot.n=2000, 
+         method="delong", 
+         alternative = "two.sided",
          boot.stratified=TRUE)
 
 
 #shlnn vs lr
 roc.test(obs_class, data.frame(shlnn_predictions$cali_pred_TRUE,
                                lr_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(shlnn_predictions_periCOVID$cali_pred_TRUE,
                                lr_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 
@@ -270,60 +262,52 @@ roc.test(obs_class_periCOVID, data.frame(shlnn_predictions_periCOVID$cali_pred_T
 #lrenp vs ecog
 roc.test(obs_class, data.frame(lrenp_predictions$cali_pred_TRUE,
                                ecog_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(lrenp_predictions_periCOVID$cali_pred_TRUE,
                                ecog_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 #rf vs ecog
 roc.test(obs_class, data.frame(rf_predictions$cali_pred_TRUE,
                                ecog_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(rf_predictions_periCOVID$cali_pred_TRUE,
                                ecog_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 #xgb vs ecog
 roc.test(obs_class, data.frame(xgb_predictions$cali_pred_TRUE,
                                ecog_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(xgb_predictions_periCOVID$cali_pred_TRUE,
                                ecog_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 
 #shlnn vs ecog
 roc.test(obs_class, data.frame(shlnn_predictions$cali_pred_TRUE,
                                ecog_predictions$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(shlnn_predictions_periCOVID$cali_pred_TRUE,
                                ecog_predictions_periCOVID$cali_pred_TRUE),
-         method="bootstrap", 
+         method="delong", 
          alternative = "two.sided", 
-         boot.n=2000, 
          boot.stratified=TRUE)
