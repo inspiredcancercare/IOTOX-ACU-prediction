@@ -212,7 +212,7 @@ We provide our code for model calibration and risk threshold determination in [r
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/38151091/151495525-e722ce4d-fa2f-4ab8-b449-130596b267cd.png">
+  <img src="https://user-images.githubusercontent.com/38151091/154921420-2c32f8e6-217f-4ef0-bd20-00f65d905a00.png">
 </p>
 
 eFigure 1. Sensitivity and specificity over acute care use risk thresholds from 0.001 to 1 for each algorithm
