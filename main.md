@@ -709,7 +709,7 @@ eFigure 3. Calibration plot for the ranfom forest algorithm.
 
 eFigure 4. Calibration plot for the extreme gradient boosting tree algorithm.
 
-**Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 20%). The model is unstable for patients in high risk area (>25%).
+**Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 50%). The model is unstable for patients in high risk area (>50%).
 
 <p align="center">
   <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161776133-39564734-4b3a-4f99-b9b3-ce8bff812b7f.png">
