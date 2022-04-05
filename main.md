@@ -686,7 +686,7 @@ We present calibration plots for all calibrated algorithms we examined on the pe
 
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151495499-6a0fb6cb-dd86-4bf9-9026-c97dd0aefeb2.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161775038-4909e440-c6fe-460a-857b-e109acbca61f.png">
 </p>
 
 eFigure 2. Calibration plot for the ECOG logistic regression algorithm.
@@ -695,23 +695,24 @@ eFigure 2. Calibration plot for the ECOG logistic regression algorithm.
 
 <p align="center">
 
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151475184-4cdf832a-b6ad-4805-b588-5e854410568a.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161775504-1fca1460-2ec0-4568-a7e1-81fe9988647f.png">
 </p>
+
 
 eFigure 3. Calibration plot for the ranfom forest algorithm.
 
 **Note:** The calibration analysis result for the random forest is suboptimal. The model tends to overestimate the risk for patients with low risk (20%) and underestimate the rsik for patients with moderate to high risk of ACU (>=50%).
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151476847-c03ee632-09e7-4c88-b0ef-eb51afec0269.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161775899-2f3a8adf-0b36-4fde-98b7-ca08358f0884.png">
 </p>
 
 eFigure 4. Calibration plot for the extreme gradient boosting tree algorithm.
 
-**Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 50%). The model is unstable for patients in high risk area (>50%).
+**Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 20%). The model is unstable for patients in high risk area (>25%).
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151476988-1777145e-a82e-4778-82a4-175e1ccede0a.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161776133-39564734-4b3a-4f99-b9b3-ce8bff812b7f.png">
 </p>
 
 eFigure 5. Calibration plot for the single hidden layer neural network algorithm.
