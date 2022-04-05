@@ -701,7 +701,7 @@ eFigure 2. Calibration plot for the ECOG logistic regression algorithm.
 
 eFigure 3. Calibration plot for the ranfom forest algorithm.
 
-**Note:** The calibration analysis result for the random forest is suboptimal. The model tends to overestimate the risk for patients with low risk (20%) and underestimate the rsik for patients with moderate to high risk of ACU (>=50%).
+**Note:** The calibration analysis result for the random forest is suboptimal. The model tends to underestimate the rsik for patients with moderate to high risk of ACU (>=30%).
 
 <p align="center">
   <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161775899-2f3a8adf-0b36-4fde-98b7-ca08358f0884.png">
@@ -709,7 +709,7 @@ eFigure 3. Calibration plot for the ranfom forest algorithm.
 
 eFigure 4. Calibration plot for the extreme gradient boosting tree algorithm.
 
-**Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 50%). The model is unstable for patients in high risk area (>50%).
+**Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 60%). The model tends to underestimate the risk for patients in a high risk area (>60%).
 
 <p align="center">
   <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161776133-39564734-4b3a-4f99-b9b3-ce8bff812b7f.png">
