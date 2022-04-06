@@ -42,7 +42,7 @@ The PVI provides a compressed insight into model’s behavior. However, the PVI 
 
 The ALE is an expansion of partial dependence plots (PDP) which estimate the relationships between model output and predictors of interest.<sup>10</sup> The ALE uses conditional distribution to avoid counting data points that are not possible in the real world, making it a robust method for estimating predictors’ effects in a highly inter-correlated dataset. For categorical predictors, the ALE estimates the average predicted positive probabilities for each category of the predicters. For numerical predictors, the ALE demonstrates relationships, e.g., linear, monotonic, or more complex, between values of the predictors and predicted positive probabilities on average. In this study, we examined the ALE for predictors that were deemed important for four or more models by the PFI. We averaged the ALE from different ML models for each important predictor to estimate each predictor’s final ALE. All model interpretation methods were performed using the R ‘DALEXtra’ package.<sup>11</sup>
 
-# In addition to ALE providing -----to be completed for SHAP
+In addition to ALE providing -----to be completed for SHAP
  
 <br></br>
 
