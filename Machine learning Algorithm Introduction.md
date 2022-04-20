@@ -40,7 +40,7 @@ The PVI provides a compressed insight into model’s behavior. However, the PVI 
 
 Accmulated local effects (ALE) 
 --------------------------------------------------------
-The ALE is an expansion of partial dependence plots (PDP) which estimate the relationships between model output and predictors of interest.<sup>10</sup> The ALE uses conditional distribution to avoid counting data points that are not possible in the real world, making it a robust method for estimating predictors’ effects in a highly inter-correlated dataset. For categorical predictors, the ALE estimates the average predicted positive probabilities for each category of the predicters. For numerical predictors, the ALE demonstrates relationships, e.g., linear, monotonic, or more complex, between values of the predictors and predicted positive probabilities on average. Oftentimes, we examin the ALE for predictors that were deemed important for four or more models by the PFI. We averaged the ALE from different ML models for each important predictor to estimate each predictor’s final ALE. All model interpretation methods were performed using the R ‘DALEXtra’ package.<sup>11</sup>
+The ALE is an expansion of partial dependence plots (PDP) which estimate the relationships between model output and predictors of interest.<sup>10</sup> The ALE uses conditional distribution to avoid counting data points that are not possible in the real world, making it a robust method for estimating predictors’ effects in a highly inter-correlated dataset. For categorical predictors, the ALE estimates the average predicted positive probabilities for each category of the predicters. For numerical predictors, the ALE demonstrates relationships, e.g., linear, monotonic, or more complex, between values of the predictors and predicted positive probabilities on average. Oftentimes, we examin the ALE for predictors that were deemed important by the PVI.
 
 SHapely Additive exPlanations (SHAP) 
 --------------------------------------------------------
@@ -69,5 +69,3 @@ References
 9. Zhang M, Yin F, Chen B, Li B, Li YP, Yan LN, et al. Mortality risk after liver transplantation in hepatocellular carcinoma recipients: a nonlinear predictive model. Surgery. 2012;151(6):889–97.  
 
 10. Molnar C. Interpretable machine learning: a guide for making black box models explainable [Internet]. 2020. Available from: https://christophm.github.io/interpretable-ml-book/ 
-
-11. Maksymiuk S, Biecek P. DALEXtra: extension for “DALEX” package. 2020. Available from: https://cran.r-project.org/package=DALEXtra 
