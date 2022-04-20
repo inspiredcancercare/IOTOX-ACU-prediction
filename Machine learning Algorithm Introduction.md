@@ -3,7 +3,7 @@
 
 In this page, we briefly introduce each ML algorithm and model interpretation techniques. We cover the following topic on this page:
 1. [An overview of various machine learning algorithms](#machine-learning-algorithm-overview)
-2. [An brief introduction to two global and one local model-agnostic explanation approaches](#model-interpretation-techniques) 
+2. [A brief introduction to two global and one local model-agnostic explanation approaches](#model-interpretation-techniques) 
 <br></br>
 
 Machine learning algorithm overview 
