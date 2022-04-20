@@ -36,7 +36,7 @@ lrenp_model<-parsnip::logistic_reg(penalty = tune(), mixture = tune()) %>%
   set_mode("classification")
 
 set.seed(my_seed)
-lrenp_params<-model %>%
+lrenp_params<-lrenp_model %>%
   parameters() %>%
   update(
     penalty = penalty(range(c(-10L,0))),
@@ -52,7 +52,7 @@ lrenp_inital_search <- model_tuning_grid(lrenp_workflow,cvfolds, lrenp_params)
 
 #Bayesian tuning based on the results of the intial random tuning 
 set.seed(my_seed)
-lrenp_params<-model %>%
+lrenp_params<-lrenp_model %>%
   parameters() %>%
   update(
     penalty = penalty(range(c(-10L,0))),
@@ -83,7 +83,7 @@ rf_model<-parsnip::rand_forest(mtry = tune(),trees = tune(), min_n = tune()) %>%
   set_mode("classification")
 
 set.seed(my_seed)
-rf_params<-model %>%
+rf_params<-rf_model %>%
   parameters() %>%
   update(
     mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
@@ -100,7 +100,7 @@ rf_inital_search <- model_tuning_grid(rf_workflow,cvfolds, rf_params)
 
 #Bayesian tuning based on the results of the intial random tuning 
 set.seed(my_seed)
-rf_params<-model %>%
+rf_params<-rf_model %>%
   parameters() %>%
   update(
     mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
@@ -137,7 +137,7 @@ xgb_model<-parsnip::boost_tree(trees = tune(),
   set_mode("classification")
 
 set.seed(my_seed)
-xgb_params<-model %>%
+xgb_params<-xgb_model %>%
   parameters() %>%
   update(mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
             trees = trees(range = c(500L, 2500L)),
@@ -156,7 +156,7 @@ xgb_inital_search <- model_tuning_grid(xgb_workflow,cvfolds, xgb_params)
 
 #Bayesian tuning based on the results of the intial random tuning 
 set.seed(my_seed)
-xgb_params<-model %>%
+xgb_params<-xgb_model %>%
   parameters() %>%
   update(mtry = mtry(range = c(1L,length(dplyr::select(juiced_df_train, -outcome)))),
             trees = trees(range = c(500L, 2500L)),
@@ -192,7 +192,7 @@ shlnn_model<-parsnip::mlp(hidden_units = tune(),
   set_mode("classification")
 
 set.seed(my_seed)
-shlnn_params<-model %>%
+shlnn_params<-shlnn_model %>%
   parameters() %>%
   update(hidden_units = hidden_units(range(c(1L,10L))),
          penalty = penalty(range(c(-10L,0))),
@@ -208,7 +208,7 @@ shlnn_inital_search <- model_tuning_grid(shlnn_workflow,cvfolds, shlnn_params)
 
 #Bayesian tuning based on the results of the intial random tuning 
 set.seed(my_seed)
-shlnn_params<-model %>%
+shlnn_params<-shlnn_model %>%
   parameters() %>%
   update(hidden_units = hidden_units(range(c(1L,10L))),
          penalty = penalty(range(c(-10L,0))),
