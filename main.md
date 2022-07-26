@@ -10,6 +10,7 @@ Table of contents
    * [Model calibration and risk threshold determination](#model-calibration-and-risk-threshold-determination)
    * [Model exmination and explanation](#model-exmination-and-explanation)
  * [Candidate predictors](#candidate-predictors)
+ * [Model performance on pre_COVID testing sample (n=479)](#model-performance-on-pre-COVID-testing-sample-(n=479))
  * [Model calibration plots](#model-calibration-plots)
  * [Variable importance plots](#variable-importance-plots)
  * [Shapely additive explanation plots](#shapely-additive-explanation-plots)
@@ -676,6 +677,26 @@ Candidate predictors
 	</tbody>
 </table>
 
+
+[Back to top](#table-of-contents)
+
+Model performance on pre-COVID testing sample (n=479)
+-----------------------
+|     <br>Metric     |     <br>LRENP     |     <br>XGBT     |     <br>RF     |     <br>SVM     |     <br>MARS     |     <br>SHLNN     |     <br>KNN     |     <br>DT     |     <br>LR     |     <br>ECOG     |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|    <br>AUROC<br>   <br>(95% CI)    |    <br>.73<br>   (.69, .78)    |    <br>.76<br>   (.71, .80)    |    <br>.73<br>   (.68, .78)    |    <br>.73<br>   (.68, .77)    |    <br>.69<br>   (.64, .74)    |    <br>.74<br>   (.70, .79)    |    <br>.68<br>   (.63, .73)    |    <br>.65<br>   (.60, .70)    |    <br>.69<br>   (.64, .74)    |    <br>.55<br>   (.49, .61)    |
+|    <br>Accuracy <br>   (95% CI)    |    <br>.70<br>   (.65, .74)    |    <br>.69<br>   (.65, .73)    |    <br>.67<br>   (.63, .71)    |    <br>.66<br>   (.62, .71)    |    <br>.65<br>   (.60, .69)    |    <br>.70<br>   (.66, .74)    |    <br>.62<br>   (.58, .67)    |    <br>.58<br>   (.54, .63)    |    <br>.64<br>   (.59, .68)    |    <br>.50<br>   (.44, .56)    |
+|    <br>Sensitivity    |    <br>.70    |    <br>.69    |    <br>.55    |    <br>.66    |    <br>.69    |    <br>.70    |    <br>.63    |    <br>.68    |    <br>.64    |    <br>.77    |
+|    <br>Specificity    |    <br>.70    |    <br>.69    |    <br>.73    |    <br>.66    |    <br>.63    |    <br>.70    |    <br>.62    |    <br>.53    |    <br>.64    |    <br>.35    |
+|    <br>PPV    |    <br>.55    |    <br>.55    |    <br>.53    |    <br>.51    |    <br>.49    |    <br>.55    |    <br>.47    |    <br>.43    |    <br>.48    |    <br>.39    |
+|    <br>NPV    |    <br>.81    |    <br>.81    |    <br>.76    |    <br>.79    |    <br>.79    |    <br>.81    |    <br>.76    |    <br>.76    |    <br>.77    |    <br>.74    |
+|    <br>True Positive    |    <br>116    |    <br>115    |    <br>92    |    <br>110    |    <br>114    |    <br>116    |    <br>105    |    <br>113    |    <br>106    |    <br>83    |
+|    <br>False Positive    |    <br>95    |    <br>96    |    <br>83    |    <br>105    |    <br>117    |    <br>94    |    <br>119    |    <br>147    |    <br>113    |    <br>128    |
+|    <br>True Negative    |    <br>218    |    <br>217    |    <br>230    |    <br>208    |    <br>196    |    <br>219    |    <br>194    |    <br>166    |    <br>200    |    <br>70    |
+|    <br>False Negative    |    <br>50    |    <br>51    |    <br>74    |    <br>56    |    <br>52    |    <br>50    |    <br>61    |    <br>53    |    <br>60    |    <br>25    |
+|    <br>Threshold    |    <br>.339    |    <br>.124    |    <br>.100    |    <br>.292    |    <br>.304    |    <br>.336    |    <br>.342    |    <br>.290    |    <br>.304    |    <br>.391    |
+
+**Abbreviations:** AUROC: area under the receiver operating characteristic curve; DT: decision tree, ECOG: Eastern Cooperative Oncology Group; FN: false negative; FP: false positive; KNN: k-nearest neighbors; LR: logistic regression; LRENP: logistic regression with elastic net penalty; MARS: multivariate adaptive regression splines; NPV: negative predictive value; PPV: positive predictive value; RF: random forest; SHLNN: single hidden layer neural network; SVM: support vector machine; TN: true negative; TP: true positive; XGBT: extreme gradient boosting trees.
 
 [Back to top](#table-of-contents)
 
