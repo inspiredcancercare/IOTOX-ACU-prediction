@@ -10,7 +10,8 @@ Table of contents
    * [Model calibration and risk threshold determination](#model-calibration-and-risk-threshold-determination)
    * [Model exmination and explanation](#model-exmination-and-explanation)
  * [Candidate predictors](#candidate-predictors)
- * [Model performance on pre_COVID testing sample (n=479)](#model-performance-on-pre-COVID-testing-sample-(n=479))
+ * [Sample characteristics](#sample-characteristics)
+ * [Model performance on pre COVID testing sample](#model-performance-on-pre-covid-testing-sample)
  * [Model calibration plots](#model-calibration-plots)
  * [Variable importance plots](#variable-importance-plots)
  * [Shapely additive explanation plots](#shapely-additive-explanation-plots)
@@ -100,7 +101,7 @@ We used [R tidymodels package version 0.1.0](https://www.tidymodels.org/) to dev
 
  eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and optimal values
  
- <table>
+<table>
     <thead>
         <tr>
             <th> ML algorithm </th>
@@ -111,89 +112,134 @@ We used [R tidymodels package version 0.1.0](https://www.tidymodels.org/) to dev
     </thead>
     <tbody>
         <tr>
-            	<td rowspan=2>LRENP</td>
-	    	<td> penalty</td>
-		<td> 10^-16 ~ 10^0 </td>
-		<td> 0.0766 </td>
+            	<td rowspan=7>XGBT</td>
+	    	<td> mtry</td>
+		<td> 1 - 298 </td>
+		<td> 21 </td>
             </tr>
         <tr>
-		<td> mixture </td>
-		<td> 0 - 1 </td>
-		<td> 0.0624 </td>
+		<td> trees </td>
+		<td> 1 - 2000 </td>
+		<td> 1799 </td>
+            </tr>
+        <tr>
+		<td> min_n </td>
+		<td> 2 - 40 </td>
+		<td> 34 </td>
+            </tr>
+        <tr>
+		<td> tree_depth </td>
+		<td> 1 - 15 </td>
+		<td> 12 </td>
+            </tr>
+        <tr>
+		<td> learn_rate </td>
+		<td>10^-10 – 10^-1</td>
+		<td>0.00558 </td>
+            </tr>
+        <tr>
+		<td> loss_reduction </td>
+		<td> 10^-10 – 10^1.5 </td>
+		<td> 0.00123 </td>
+            </tr>
+        <tr>
+		<td> sample_size </td>
+		<td> 0.1 - 1 </td>
+		<td> 1036 </td>
             </tr>
 	<tr>
 	    	<td rowspan=3>RF</td>
 		<td> mtry </td>
-		<td> 1 - 83 </td>
-		<td> 1 </td>
+		<td> 1 - 298 </td>
+		<td> 16 </td>
 	    </tr>
 	<tr>
 		<td> trees </td>
-		<td> 1 - 4500 </td>
-		<td> 1500 </td>
+		<td> 1 - 2500 </td>
+		<td> 1036 </td>
 	    </tr>
 	<tr>
 		<td> min_n </td>
-		<td> 2 - 700 </td>
-		<td> 291 </td>
+		<td> 1 - 40 </td>
+		<td> 7 </td>
 	    </tr>
         <tr>
-		<td rowspan=7>XGBT</td>
-		<td> mtry </td>
-		<td> 1 - 83 </td>
-		<td> 8 </td>
+		<td rowspan=2>SVM</td>
+		<td> cost </td>
+		<td> 10^-15 – 10^-1 </td>
+		<td> 0.000516 </td>
         </tr>
-	<tr>
-		<td> trees </td>
-		<td> 1 - 4000 </td>
-		<td> 1003 </td>
+<tr>
+		<td> rbf_sigma </td>
+		<td> 0.0013 – 0.00234 </td>
+		<td> 0.00221 </td>
 	    </tr>
-	<tr>
-		<td> min_n </td>
-		<td> 1 - 75 </td>
-		<td> 11 </td>
+        <tr>
+		<td rowspan=2>LRENP</td>
+		<td> penalty </td>
+		<td> 10^-10 – 10^0 </td>
+		<td> 0.18 </td>
+        </tr>
+<tr>
+		<td> mixture </td>
+		<td> 0 - 1 </td>
+		<td> 0.0516 </td>
 	    </tr>
-	<tr>
-		<td> tree_depth </td>
-		<td> 1 - 150 </td>
-		<td> 14 </td>
-	    </tr>
-	 <tr>
-		<td> learn_rate </td>
-		<td> 10^-17 - 10^-1 </td>
-		<td> 0.000000014 </td>
-	    </tr>
-	 <tr>
-		<td> loss_reduction </td>
-		<td> 10^-17 - 10^1.5 </td>
-		<td> 0.0000000000154 </td>
-	    </tr> 
-	<tr>
-		<td> sample_size </td>
-		<td> 0.1 - 1 </td>
-		<td> 0.763 </td>
-	    </tr> 
         <tr>
 		<td rowspan=3>SHLNN</td>
 		<td> hidden_units </td>
-		<td> 1 - 20 </td>
+		<td> 1 - 50 </td>
 		<td> 1 </td>
         </tr>
 	<tr>
 		<td> penalty </td>
-		<td> 10^-10 - 10^2 </td>
-		<td> 0.764 </td>
+		<td> 10^-10 - 10^1 </td>
+		<td> 9.16 </td>
 	    </tr>
 	 <tr>
 		 <td> epochs </td>
-		 <td> 1 - 1500 </td>
-		 <td> 926 </td>
+		 <td> 1 - 2000 </td>
+		 <td> 1793 </td>
+	    </tr>
+        <tr>
+		<td rowspan=1>KNN</td>
+		<td> neighbors </td>
+		<td> 1 - 500 </td>
+		<td> 500 </td>
+        </tr>
+        <tr>
+		<td rowspan=2>MARS</td>
+		<td> num_terms </td>
+		<td> 1 - 298</td>
+		<td> 18 </td>
+        </tr>
+<tr>
+		 <td> prod_degree </td>
+		 <td> 1 - 3 </td>
+		 <td> 3 </td>
+	    </tr>
+<tr>
+		<td rowspan=3>DT</td>
+		<td> cost_complexity </td>
+		<td> 10^-10 – 10^-1</td>
+		<td> 00.000242 </td>
+        	</tr>
+<tr>
+		 <td> tree_depth </td>
+		 <td> 1 - 15 </td>
+		 <td> 2 </td>
+	    </tr>
+<tr>
+		 <td> min_n </td>
+		 <td> 2 - 40 </td>
+		 <td> 7 </td>
 	    </tr>
     	<tr>
-		<td colspan=4> <b>Abbreviations:</b> LRENP: logistic regression with elastic net penalty; RF: random forest; XGBT: extreme gradient boosting trees; SHLNN: single hidden layer neural network.</td>
+		<td colspan=4> <b>Abbreviations:</b> ; DT: decision tree; KNN: k-nearest neighbors; LR: logistic regression; LRENP: logistic regression with elastic net penalty; MARS: multivariate adaptive regression splines; RF: random forest; SHLNN: single hidden layer neural network; SVM: support vector machine; XGBT: extreme gradient boosting trees.</td>
 	    </tr>
 	</tbody>
 </table>
+
 
 
 [Back to top](#table-of-contents)
@@ -237,466 +283,613 @@ Candidate predictors
 =================================================
 
  <table>
-    <thead>
-        <tr>
-            <th> Category </th>
-            <th> Name </th>
-	    <th> Value </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            	<td rowspan=6> Basic information </td>
-	    	<td> Age </td>
-		<td> Numeric </td>
-            </tr>
-		<tr>
-			<td> Gender </td>
-			<td> Male, Female </td>
-		    </tr>
-		<tr>
-			<td> Marital status </td>
-			<td> Legally separated, Married, Other, Significant other, Single, Widowed, Divorced </td>
-		    </tr>
-		<tr>
-			<td> Smoking status </td>
-			<td> Current Every Day Smoker, Current Some Day Smoker, Former Smoker, Heavy Tobacco Smoker, Light Tobacco Smoker, Never Smoker, Passive Smoke Exposure - Never Smoker, Smoker, Current Status Unknown   </td>
-		    </tr>		
-		<tr>
-			<td> ECOG </td>
-			<td> 0, 1, 2, 3, 4 </td>
-		    </tr>
-	   	<tr>
-			<td> ADI national </td>
-			<td> 0 - 99, GQ, GQ-PH, KVM, PH </td>
-		    </tr>
-	<tr>
-	    	<td rowspan= 6 >Treatment</td>
-		<td> RT 30 days before </td>
-		<td> True, False </td>
-	    </tr>
-		<tr>
-			<td> Atezolizumab </td>
-			<td> True, False </td>
-		    </tr>
-		<tr>
-			<td> Avelumab </td>
-			<td> True, False </td>
-		    </tr>
-	   	<tr>
-			<td> Cemiplimab-rwlc </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Durvalumab </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Pembrolizumab </td>
-			<td> True, False </td>
-		    </tr>
-        <tr>
-		<td rowspan=35>Cormobidity</td>
-		<td> Anxiety </td>
-		<td> True, False </td>
-        </tr>
-		<tr>
-			<td> Anxiety </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Asthma </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Atherosclerosis </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Atrial Fibrillaton </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Cardiac arrhythmia </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Cerebrovascular accident </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Cerebrovascular disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Chronic kidney disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Chronic obstructive pulmonary disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Chronic pulmonary disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Congestive heart failure </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Coronary artery disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Deep vein thrombosis </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Dementia </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Depression </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Diabetes mellitus </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> ESRD </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Gerd </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Hemiplegia paraplegia </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Hypertension </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Hypothyroidism </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Mild liver disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Moderate or severe liver disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Myocardial infarction </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Neuropathy </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Obesity </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Obstructive sleep apnea </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Peripheral vascular disease </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Psychosis </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Pulmonary hypertension </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Rheumatoid arthritis </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Leukopenia </td>
-			<td> True, False </td>
-		    </tr>
-	    	<tr>
-			<td> Thrombocytopenia </td>
-			<td> True, False </td>
-		    </tr>
-		<tr>
-			<td> low platelets or wbc </td>
-			<td> True, False  </td>
-		     </tr>
-        <tr>
-		<td rowspan=9>Vital sign</td>
-		<td> Systolic blood pressure  </td>
-		<td> Numeric </td>
-        </tr>
-		<tr>
-			<td> Diastolic blood pressure </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Mean arterial pressure </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Body temperature </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Pulse </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Respiration </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> SPO2 </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> BMI </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Pain </td>
-			<td> 0 - 10 </td>
-		    </tr>
-	     <tr>
-		<td rowspan=53>Laboratory</td>
-		<td> ALT  </td>
-		<td> Numeric </td>
-        </tr>
-		<tr>
-			<td> AST </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Albumin level </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Alkaline phosphatase </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> BUN </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Basophil abs </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Basophil pct </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> CO2 </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Calcium </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Chloride </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Creatinine </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Eosinophil abs </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Eosinophil pct </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Glucose level </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> HCT </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> HGB </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> IGRE pct </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> LDH </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Lymphocyte abs </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Lymphocyte pct </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> MCH </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> MCHC </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> MCV </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> MPV </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Monocyte abs </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Monocyte pct </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Neutrophil abs </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Neutrophil pct </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Platelet count </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Potassium level </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> RBC </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> RDW CV </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> RDW SD </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Sodium level </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Total protein </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> WBC </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> eGFR AA </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Creatinine clear </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Anion gap </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Bili direct </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Bili indirect </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Bili total </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> IG abs </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> INR </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> INRBC </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Magnesium </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> PT </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> Phosphorus </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> T4 free </td>
-			<td> Numeric </td>
-		    </tr>
-	    	<tr>
-			<td> TSH </td>
-			<td> Numeric </td>
-		    </tr>
-	</tbody>
+<thead>
+  <tr>
+    <th>Category</th>
+    <th>Name</th>
+    <th>Value</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="7">Basic information</td>
+    <td>Age</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Gender</td>
+    <td>Male, Female</td>
+  </tr>
+  <tr>
+    <td>Marital status</td>
+    <td>Legally separated, Married,&nbsp;&nbsp;&nbsp;Other, Significant other, Single, Widowed, Divorced</td>
+  </tr>
+  <tr>
+    <td>Smoking status</td>
+    <td>Current Every Day Smoker,&nbsp;&nbsp;&nbsp;Current Some Day Smoker, Former Smoker, Heavy Tobacco Smoker, Light Tobacco&nbsp;&nbsp;&nbsp;Smoker, Never Smoker, Passive Smoke Exposure - Never Smoker, Smoker, Current&nbsp;&nbsp;&nbsp;Status Unknown</td>
+  </tr>
+  <tr>
+    <td>Alcohol use</td>
+    <td>Yes, Not current, Never, No</td>
+  </tr>
+  <tr>
+    <td>ECOG</td>
+    <td>0, 1, 2, 3, 4</td>
+  </tr>
+  <tr>
+    <td>Area deprivation index -&nbsp;&nbsp;&nbsp;national</td>
+    <td>0 - 99, GQ, GQ-PH, KVM, PH</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Treatment</td>
+    <td>RT 30 days before</td>
+    <td>True, False</td>
+  </tr>
+  <tr>
+    <td>Immune checkpoint inhibitor agent</td>
+    <td>Avelumab, Durvalumab, Nivolumab, Pembrolizumab, Cemiplimab-rwlc,&nbsp;&nbsp;&nbsp;Atezolizumab</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Cancer information</td>
+    <td>Site</td>
+    <td>Nominal </td>
+  </tr>
+  <tr>
+    <td>Histology</td>
+    <td>Nominal </td>
+  </tr>
+  <tr>
+    <td>Metastasis status</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td rowspan="41">Medical history</td>
+    <td>Anxiety</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Asthma</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Atrioventricular septal defect</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Atrial fibrillaton</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Bronchiolitis obliterans organizing pneumonia</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Cardiac arrhythmia</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Cerebrovascular accident</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Cerebrovascular disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Chronic kidney disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Chronic obstructive pulmonary disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Chronic pulmonary disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Congestive heart failure</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Coronary artery disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Deep vein thrombosis</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Dementia</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Depression</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Diabetes insipidus</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Diabetes mellitus</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>ESRD</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>ESRD SF</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Gerd</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Hemiplegia Paraplegia</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Human immunodeficiency virus</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Hypertension</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Hypogammaglobulinemia</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Hypothyroidism</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Immune related adverse events pneumonitis</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Cryptogenic organizing pneumonia</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Liver disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Mild liver disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Moderate or severe liver disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Myocardial infarction</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Neuropathy</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Obesity</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Obstructive sleep apnea</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Peripheral vascular disease</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Pneumonia</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Psychosis</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Pulmonary embolism</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Pulmonary hypertension</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td>Rheumatoid arthritis</td>
+    <td>Yes, No</td>
+  </tr>
+  <tr>
+    <td rowspan="65">Laboratory</td>
+    <td>ALT last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>AST last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Albumin Lvl last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Alk Phos last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Anion Gap last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>BUN last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Basophil Abs last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Basophil pct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Bili Direct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Bili Indirect last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Bili Total last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>CO2 last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Calcium Lvl last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Chloride last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Creatinine last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Eosinophil Abs last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Eosinophil pct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Glucose Level last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Hct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Hgb last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>IGRE pct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>IG Abs last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>INRBC last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>LDH last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Lymphocyte Abs last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Lymphocyte pct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>MCHC last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>MCH last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>MCV last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>MPV last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Magnesium last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Monocyte Abs last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Monocyte pct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Neutrophil Abs last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Neutrophil pct last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Phosphorus last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Platelet count last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Potassium Lvl last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>RBC last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>RDW CV last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>RDW SD last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Sodium Lvl last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>T4 Free last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>TSH last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Total Protein last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>WBC last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Creatinine clear last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>eGFR AA last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Cortisol last, mean,SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>Free T3 last, mean,SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>INR last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>Lipase Lvl last, mean,SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>POC Crea last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>POC Glucose last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>POC creatinine clear last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>T3 Total last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>Total Cells last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>UA Protein last, mean SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>UA RBC last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>UA Spec Grav last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>UA WBC last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>UA pH last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>Uric Acid last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>aPTT last, , mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td>POC Glucose last, mean, SD</td>
+    <td>Removed due to high missing rate</td>
+  </tr>
+  <tr>
+    <td rowspan="7">Vital Sign</td>
+    <td>Pain last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Pulse last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Respiration last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Spo2 last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Body temperature last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Diastolic blood pressurelast, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+  <tr>
+    <td>Systolic blood pressure last, mean, SD</td>
+    <td>Numeric</td>
+  </tr>
+</tbody>
 </table>
-
 
 [Back to top](#table-of-contents)
 
-Model performance on pre-COVID testing sample (n=479)
------------------------
-|     <br>Metric     |     <br>LRENP     |     <br>XGBT     |     <br>RF     |     <br>SVM     |     <br>MARS     |     <br>SHLNN     |     <br>KNN     |     <br>DT     |     <br>LR     |     <br>ECOG     |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|    <br>AUROC<br>   <br>(95% CI)    |    <br>.73<br>   (.69, .78)    |    <br>.76<br>   (.71, .80)    |    <br>.73<br>   (.68, .78)    |    <br>.73<br>   (.68, .77)    |    <br>.69<br>   (.64, .74)    |    <br>.74<br>   (.70, .79)    |    <br>.68<br>   (.63, .73)    |    <br>.65<br>   (.60, .70)    |    <br>.69<br>   (.64, .74)    |    <br>.55<br>   (.49, .61)    |
-|    <br>Accuracy <br>   (95% CI)    |    <br>.70<br>   (.65, .74)    |    <br>.69<br>   (.65, .73)    |    <br>.67<br>   (.63, .71)    |    <br>.66<br>   (.62, .71)    |    <br>.65<br>   (.60, .69)    |    <br>.70<br>   (.66, .74)    |    <br>.62<br>   (.58, .67)    |    <br>.58<br>   (.54, .63)    |    <br>.64<br>   (.59, .68)    |    <br>.50<br>   (.44, .56)    |
-|    <br>Sensitivity    |    <br>.70    |    <br>.69    |    <br>.55    |    <br>.66    |    <br>.69    |    <br>.70    |    <br>.63    |    <br>.68    |    <br>.64    |    <br>.77    |
-|    <br>Specificity    |    <br>.70    |    <br>.69    |    <br>.73    |    <br>.66    |    <br>.63    |    <br>.70    |    <br>.62    |    <br>.53    |    <br>.64    |    <br>.35    |
-|    <br>PPV    |    <br>.55    |    <br>.55    |    <br>.53    |    <br>.51    |    <br>.49    |    <br>.55    |    <br>.47    |    <br>.43    |    <br>.48    |    <br>.39    |
-|    <br>NPV    |    <br>.81    |    <br>.81    |    <br>.76    |    <br>.79    |    <br>.79    |    <br>.81    |    <br>.76    |    <br>.76    |    <br>.77    |    <br>.74    |
-|    <br>True Positive    |    <br>116    |    <br>115    |    <br>92    |    <br>110    |    <br>114    |    <br>116    |    <br>105    |    <br>113    |    <br>106    |    <br>83    |
-|    <br>False Positive    |    <br>95    |    <br>96    |    <br>83    |    <br>105    |    <br>117    |    <br>94    |    <br>119    |    <br>147    |    <br>113    |    <br>128    |
-|    <br>True Negative    |    <br>218    |    <br>217    |    <br>230    |    <br>208    |    <br>196    |    <br>219    |    <br>194    |    <br>166    |    <br>200    |    <br>70    |
-|    <br>False Negative    |    <br>50    |    <br>51    |    <br>74    |    <br>56    |    <br>52    |    <br>50    |    <br>61    |    <br>53    |    <br>60    |    <br>25    |
-|    <br>Threshold    |    <br>.339    |    <br>.124    |    <br>.100    |    <br>.292    |    <br>.304    |    <br>.336    |    <br>.342    |    <br>.290    |    <br>.304    |    <br>.391    |
 
-**Abbreviations:** AUROC: area under the receiver operating characteristic curve; DT: decision tree, ECOG: Eastern Cooperative Oncology Group; FN: false negative; FP: false positive; KNN: k-nearest neighbors; LR: logistic regression; LRENP: logistic regression with elastic net penalty; MARS: multivariate adaptive regression splines; NPV: negative predictive value; PPV: positive predictive value; RF: random forest; SHLNN: single hidden layer neural network; SVM: support vector machine; TN: true negative; TP: true positive; XGBT: extreme gradient boosting trees.
+Sample characteristics
+-----------------------
+eTable 1: Patient characteristic description and comparison by sample 
+
+| Variables |  | Pre-COVID    sample<br>    <br>(N = 4,010) |  | Peri-COVID    sample<br>    <br>(N = 3,950) |  | P-value |
+|---|---|---|---|---|---|---|
+|  |  | Mean or n | SD or % | Mean or n | SD or % |  |
+| Age |  | 64.7 | 12.6 | 64.7 | 13.1 | .96 |
+| Gender | Male | 2,539 | 63.3% | 2,369 | 60.0% | <.01 |
+|  | Female | 1,471 | 36.7% | 1,581 | 40.0% |  |
+| Race | White | 3,242 | 80.8% | 3,149 | 79.7% | .06 |
+|  | Black | 271 | 6.8% | 323 | 8.2% |  |
+|  | Other | 467 | 11.6% | 449 | 11.4% |  |
+|  | Unknown | 30 | 0.7% | 29 | 0.7% |  |
+| Marital status | Married | 2,977 | 74.2% | 2,802 | 70.9% | <.01 |
+|  | Single | 980 | 24.4% | 1,074 | 27.2% |  |
+|  | Other | 40 | 1.0% | 69 | 1.7% |  |
+|  | Unknown | 13 | 0.3% | 5 | 0.1% |  |
+| Smoking status | Smoker | 347 | 8.7% | 298 | 7.5% | <.01 |
+|  | Former smoker | 1,990 | 49.6% | 1,830 | 46.3% |  |
+|  | Never smoker | 1,631 | 40.7% | 1,800 | 45.6% |  |
+|  | Unknown | 42 | 1.0% | 19 | 0.5% |  |
+| Alcohol use | Yes | 1,448 | 36.1% | 1,30 | 32.9% | <.01 |
+|  | Former user | 289 | 7.2% | 1,388 | 35.1% |  |
+|  | No | 2,104 | 52.5% | 1,155 | 29.2% |  |
+|  | Unknown | 169 | 4.2% | 106 | 2.7% |  |
+| ECOG | 0 | 794 | 19.8% | 436 | 11.0% | .15 |
+|  | 1 | 1,255 | 31.3% | 757 | 19.2% |  |
+|  | >=2 | 699 | 17.4% | 364 | 9.2% |  |
+|  | Unknown | 1,262 | 31.5% | 2,393 | 60.6% |  |
+| Cancer site | Bronchus   and lung | 1,107 | 27.6% | 806 | 20.4% | <.01 |
+|  | Skin | 787 | 19.6% | 615 | 15.6% |  |
+|  | Kidney | 397 | 9.9% | 403 | 10.2% |  |
+|  | Bladder | 158 | 3.9% | 126 | 3.2% |  |
+|  | Prostate   gland | 145 | 3.6% | 139 | 3.5% |  |
+|  | Breast | 73 | 1.8% | 190 | 4.8% |  |
+|  | Colon | 73 | 1.8% | 94 | 2.4% |  |
+|  | Stomach | 61 | 1.5% | 82 | 2.1% |  |
+|  | Oropharynx | 56 | 1.4% | 49 | 1.2% |  |
+|  | Thyroid   gland | 51 | 1.3% | 45 | 1.1% |  |
+|  | Other | 761 | 19.0% | 1,006 | 25.5% |  |
+|  | Unknown | 341 | 8.5% | 395 | 10.0% |  |
+| Cancer   histology | Adenocarcinoma | 1,404 | 35.0% | 1,424 | 36.1% |  |
+|  | Nevi and Melanoma | 652 | 16.3% | 476 | 12.1% |  |
+|  | Squamous   or transitional cell Carcinoma | 625 | 15.6% | 561 | 14.2% |  |
+|  | Other   specific Carcinoma | 344 | 8.6% | 296 | 7.5% |  |
+|  | Sarcoma   or soft tissue tumor | 47 | 1.2% | 75 | 1.9% |  |
+|  | Basal   cell Carcinoma | 29 | 0.7% | 29 | 0.7% |  |
+|  | Other | 568 | 14.2% | 694 | 17.6% |  |
+|  | Unknown | 341 | 8.5% | 395 | 10.0% |  |
+| Metastasis status | Yes | 2,819 | 70.3% | 2,679 | 67.8% | .15 |
+|  | No | 850 | 21.2% | 876 | 22.2% |  |
+|  | Unknown | 341 | 8.5% | 395 | 10.0% |  |
+| 30 days prior   RT | Yes | 268 | 6.7% | 270 | 6.8% | .81 |
+|  | No | 3,742 | 93.3% | 3,680 | 93.2% |  |
+| ICI agent | Atezolizumab | 253 | 6.3% | 332 | 8.4 | <.01 |
+|  | Avelumab | 42 | 1.0% | 53 | 1.3% |  |
+|  | Cemiplimab-rwlc | 31 | 0.8% | 70 | 1.8% |  |
+|  | Durvalumab | 115 | 2.9% | 149 | 3.8% |  |
+|  | Ipilimumab | 483 | 12.0% | 344 | 8.7% |  |
+|  | Nivolumab | 1,305 | 32.5% | 1,028 | 26.0% |  |
+|  | Pembrolizumab | 1,781 | 44.4% | 1,974 | 50.0% |  |
+| 90-day   admission | Yes | 1,436 | 35.8% | 1,080 | 27.3% | <.01 |
+|  | No | 2,574 | 64.2% | 2,870 | 72.7% |  |
+
+***Abbrevations:*** COVID: coronavirus disease; ECOG: Eastern cooperative oncology group; ICI: immune checkpoint inhibitors; RT: radiation therapy.
+[Back to top](#table-of-contents)
+
+
+Model performance on pre COVID testing sample
+----------------------
+eTable 2: Model performance on pre-COVID testing sample (N = 802) 
+|     <br>Metric     |     <br>XGBT     |     <br>RF     |     <br>SVM     |     <br>LRENP     |     <br>SHLNN     |     <br>KNN     |     <br>MARS     |     <br>DT     |     <br>LR     |     <br>ECOG     |
+|---|---|---|---|---|---|---|---|---|---|---|
+|    <br>AUROC<br>   <br>(95% CI)    |    <br>.67<br>   (.63, .71)    |    <br>.65<br>   (.61, .69)    |    <br>.66<br>   (.63, .70)    |    <br>.65<br>   (.61, .69)    |    <br>.65<br>   (.61, .69)    |    <br>.64<br>   (.60, .68)    |    <br>.64<br>   (.60, .68)    |    <br>.57<br>   (.54, .61)    |    <br>.64<br>   (.60, .68)    |    <br>.60<br>   (.55, .64)    |
+|    <br>Accuracy <br>   (95% CI)    |    <br>.62<br>   (.59, .65)    |    <br>.63<br>   (.60, .67)    |    <br>.63<br>   (.59, .66)    |    <br>.63<br>   (.59, .66)    |    <br>.61<br>   (.58, .65)    |    <br>.61<br>   (.57, .64)    |    <br>.62<br>   (.58, .65)    |    <br>.59<br>   (.56, .63)    |    <br>.61<br>   (.58, .65)    |    <br>.51<br>   (.47, .55)    |
+|    <br>Sensitivity    |    <br>.62    |    <br>.61    |    <br>.63    |    <br>.63    |    <br>.61    |    <br>.61    |    <br>.62    |    <br>.49    |    <br>.62    |    <br>.79    |
+|    <br>Specificity    |    <br>.62    |    <br>.65    |    <br>.63    |    <br>.63    |    <br>.61    |    <br>.61    |    <br>.62    |    <br>.65    |    <br>.61    |    <br>.35    |
+|    <br>PPV    |    <br>.47    |    <br>.49    |    <br>.48    |    <br>.48    |    <br>.47    |    <br>.46    |    <br>.47    |    <br>.44    |    <br>.47    |    <br>.41    |
+|    <br>NPV    |    <br>.75    |    <br>.75    |    <br>.75    |    <br>.75    |    <br>.74    |    <br>.74    |    <br>.74    |    <br>.70    |    <br>.74    |    <br>.75    |
+|    <br>True Positive    |    <br>177    |    <br>174    |    <br>180    |    <br>179    |    <br>175    |    <br>174    |    <br>176    |    <br>140    |    <br>176    |    <br>157    |
+|    <br>False Positive    |    <br>196    |    <br>183    |    <br>192    |    <br>192    |    <br>199    |    <br>201    |    <br>198    |    <br>181    |    <br>201    |    <br>228    |
+|    <br>True Negative    |    <br>320    |    <br>333    |    <br>324    |    <br>324    |    <br>317    |    <br>315    |    <br>318    |    <br>335    |    <br>315    |    <br>122    |
+|    <br>False Negative    |    <br>109    |    <br>112    |    <br>106    |    <br>107    |    <br>111    |    <br>112    |    <br>110    |    <br>146    |    <br>110    |    <br>41    |
+|    <br>Threshold    |    <br>.206    |    <br>.100    |    <br>.299    |    <br>.329    |    <br>.301    |    <br>.336    |    <br>.326    |    <br>.282    |    <br>.311    |    <br>.321    |
+
+**Abbreviations:** AUROC: area under the receiver operating characteristic curve; DT: decision tree; ECOG: Eastern Cooperative Oncology Group; FN: false negative; FP: false positive; KNN: k-nearest neighbors; LR: logistic regression; LRENP: logistic regression with elastic net penalty; MARS: multivariate adaptive regression splines; NPV: negative predictive value; PPV: positive predictive value; RF: random forest; SHLNN: single hidden layer neural network; SVM: support vector machine; TN: true negative; TP: true positive; XGBT: extreme gradient boosting trees.
 
 [Back to top](#table-of-contents)
 
