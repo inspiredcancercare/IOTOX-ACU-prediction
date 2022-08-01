@@ -47,14 +47,22 @@ predictors<-names(df_train)
 formula<-as.formula(paste(outcome, paste(predictors, collapse = "+"), sep="~"))
 print("formula:")
 print(formula)
-log_trans_variable<- c("lab_AST","lab_ALT","lab_ALK_Phos","lab_BUN","lab_Basophilab_Abs", "lab_Basophilab_pct",
-	"lab_Chloride", "lab_Creatinine", "lab_Eosinophilab_pct","lab_Eosinophilab_Abs","lab_Platelet", 
-	"lab_Glucose_Lvl", "lab_IGRE_pct",  "lab_LDH", "lab_Lymphocyte_Abs", "lab_Lymphocyte_pct", "lab_Monocyte_Abs",
-	"lab_Neutrophilab_Abs",  "lab_Neutrophilab_pct","lab_RBC","lab_RDW_CV", "lab_RDW_SD", "lab_eGFR_AA", 
-	"lab_creatinine_clear",   "lab_Bili_Direct", "lab_Bili_Indirect", "lab_Bili_Total","lab_IG_Abs","lab_INR",
-	"lab_INRBC", "lab_PT","lab_TSH", "lab_WBC","vit_pulse","vit_BMI","vit_spo2","vit_resp")
+log_trans_variable<- c("lab_AST_last","lab_ALT_last”,"lab_ALK_Phos_last”,"lab_BUN_last”,"lab_Basophilab_Abs_last",”lab_Basophilab_pct_last”,
+"lab_Chloride_last”,”lab_Creatinine_last”,”lab_Eosinophilab_pct_last”,"lab_Eosinophilab_Abs_last”,"lab_Platelet_last”,”lab_Glucose_Lvl_last”,
+”lab_IGRE_pct_last", “lab_LDH_last",”lab_Lymphocyte_Abs_last”,”lab_Lymphocyte_pct_last”,”lab_Monocyte_Abs_last",”lab_Neutrophilab_Abs_last”, “lab_Neutrophilab_pct_last”,"lab_RBC_last”,"lab_RDW_CV_last”,”lab_RDW_SD_last”,”lab_eGFR_AA_last”,”lab_creatinine_clear_last”,
+”lab_Bili_Direct_last”,”lab_Bili_Indirect_last",”lab_Bili_Total_last”,"lab_IG_Abs_last”,"lab_INR_last”,"lab_INRBC_last”,"lab_TSH_last",
+”lab_WBC_last”,"vit_p_last”,"vit_spo2_last","vit_r_last","lab_AST_mean","lab_ALT_mean”,"lab_ALK_Phos_mean”,"lab_BUN_mean”,"lab_Basophilab_Abs_mean",
+”lab_Basophilab_pct_mean”,"lab_Chloride_mean”,”lab_Creatinine_mean",”lab_Eosinophilab_pct_mean”,”lab_Eosinophilab_Abs_mean”,"lab_Platelet_mean",
+”lab_Glucose_Lvl_mean”,”lab_IGRE_pct_mean”, “lab_LDH_mean”, ”lab_Lymphocyte_Abs_mean", ”lab_Lymphocyte_pct_mean”, ”lab_Monocyte_Abs_mean”,
+"lab_Neutrophilab_Abs_mean”,“lab_Neutrophilab_pct_mean”,"lab_RBC_mean”,"lab_RDW_CV_mean",”lab_RDW_SD_mean”,”lab_eGFR_AA_mean”,”lab_creatinine_clear_mean",
+”lab_Bili_Direct_mean”,”lab_Bili_Indirect_mean”,”lab_Bili_Total_mean”,"lab_IG_Abs_mean","lab_INR_mean”,"lab_INRBC_mean”,"lab_TSH_mean”,”lab_WBC_mean",
+”vit_p_mean","vit_spo2_mean","vit_r_mean”,”lab_AST_sd","lab_ALT_sd”,"lab_ALK_Phos_sd”,"lab_BUN_sd”,"lab_Basophilab_Abs_sd”,”lab_Basophilab_pct_sd”,
+"lab_Chloride_sd”,”lab_Creatinine_sd”,”lab_Eosinophilab_pct_sd”,"lab_Eosinophilab_Abs_sd”,"lab_Platelet_sd”,”lab_Glucose_Lvl_sd”,”lab_IGRE_pct_sd”, “lab_LDH_sd”,”lab_Lymphocyte_Abs_sd”,”lab_Lymphocyte_pct_sd”,”lab_Monocyte_Abs_sd", "lab_Neutrophilab_Abs_sd”, “lab_Neutrophilab_pct_sd”, 
+"lab_RBC_sd”,"lab_RDW_CV_sd”, ”lab_RDW_SD_sd”,”lab_eGFR_AA_sd”,”lab_creatinine_clear_sd",  “lab_Bili_Direct_sd”,”lab_Bili_Indirect_sd”,
+”lab_Bili_Total_sd”,"lab_IG_Abs_sd”,"lab_INR_sd”,"lab_INRBC_sd”, "lab_TSH_sd”, ”lab_WBC_sd", "vit_p_sd", 
+"vit_spo2_sd", "vit_r_sd”)
 
-ordinal_varaible<-c("vit_pain","ecog_latest", "ADI_NATRANK")
+ordinal_varaible<-c("vit_pain","pps_ecog_last", "ADI_NATRANK")
 
 ##### split data into training and testing samples ####
 set.seed(my_seed)
@@ -64,17 +72,16 @@ df_test<-testing(split)
 
 ##### set a recipe for data prepraration ####
 df_recipe<-recipe(formula, df_train) %>%
-  step_medianimpute(all_numeric(), -recipes::all_outcomes()) %>%
-  step_modeimpute(all_nominal(), -recipes::all_outcomes()) %>%
-  step_log(!!!syms(log_trans_variable), offset = 1) %>%
-  step_YeoJohnson(lab_Anion_Gap) %>%
-  step_other(marital, smoke, threshold = 0.1, other = "other") %>% 
-  step_integer(!!ordinal_varaible) %>%
-  step_normalize(all_numeric(),-!!ordinal_varaible,-recipes::all_outcomes()) %>%
-  step_zv(all_predictors(),-recipes::all_outcomes()) %>%
-  step_nzv(all_predictors(),-recipes::all_outcomes()) %>%
-  step_dummy(all_nominal(),-recipes::all_outcomes(), one_hot=FALSE, id="dummy") %>%
-  step_corr(recipes::all_predictors(),-recipes::all_outcomes())
+   step_medianimpute(recipes::all_numeric(), -recipes::all_outcomes(), id = "median_imputation") %>%
+   step_modeimpute(recipes::all_nominal(), -recipes::all_outcomes(), id = "mode_imputation") %>%
+   step_YeoJohnson(!!!log_trans_variables, -recipes::all_outcomes(), id = "yeoJohnson_transformation") %>%
+   step_normalize(recipes::all_numeric(), -recipes::all_outcomes(), id = "scale_normalization") %>%
+   step_integer(!!!ordinal_varaibles, id = "ordinalscore") %>%
+   step_other(gender, marital_status, smoking, alcohol,disease_site,disease_histology, threshold = 0.1, other = "other", id = "lumping") %>%
+   step_zv(recipes::all_predictors(),-recipes::all_outcomes(), id = "remove zero variance") %>%
+   step_nzv(recipes::all_predictors(),-recipes::all_outcomes(), id = "remove near zero variance") %>%
+   step_dummy(recipes::all_nominal(), -recipes::all_outcomes(), one_hot=FALSE, id="create_dummy_variables") %>%
+   step_corr(recipes::all_numeric(), -recipes::all_outcomes(), id="remove_high_correlation")
   
 #### Create resample ####
 set.seed(my_seed)
@@ -256,13 +263,6 @@ After creating ML models, we use Platt scaling method to create a calibration mo
 To determine the risk threshold, we calculated sensitivity and specificity over risk thresholds from 0.001 to 1 using calibrated outputs on the pre-COVID testing sample for each algorithm. We selected the threshold which maximizes both sensitivity and specificity of each model. 
 
 We provide our code for model calibration and risk threshold determination in [reclassified.R](https://github.com/inspiredcancercare/IOTOXACU/blob/main/R%20code/reclassification.R)
-
-
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/38151091/154921420-2c32f8e6-217f-4ef0-bd20-00f65d905a00.png">
-</p>
-
-eFigure 1. Sensitivity and specificity over acute care use risk thresholds from 0.001 to 1 for each algorithm
 
 [Back to top](#table-of-contents)
 
@@ -900,28 +900,28 @@ We present calibration plots for all calibrated algorithms we examined on the pe
 
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161775038-4909e440-c6fe-460a-857b-e109acbca61f.png">
+  <img width="600" height="400" src="https://user-images.githubusercontent.com/38151091/182243845-fd4859c6-fe97-4680-8e20-ddaa0a5148e5.png">
 </p>
 
-eFigure 2. Calibration plot for the ECOG logistic regression algorithm.
+eFigure 1. Calibration plot for the ECOG logistic regression algorithm.
 
-**Note:** The lack of alignment between the solid and dash lines in most areas indicates that the model is not well calibrated.
+**Note:** The ECOG model assigned all patients with similar scores and was likely to overpredict in the area of predicted probabilities >=0.5.
 
 <p align="center">
 
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161775504-1fca1460-2ec0-4568-a7e1-81fe9988647f.png">
+  <img width="600" height="400" src="https://user-images.githubusercontent.com/38151091/182244689-929a2167-c5dd-4fd0-9e6e-04ce3bfe4a3f.png">
 </p>
 
 
-eFigure 3. Calibration plot for the ranfom forest algorithm.
+eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
 
-**Note:** The calibration analysis result for the random forest is suboptimal. The model tends to underestimate the rsik for patients with moderate to high risk of ACU (>=30%).
+**Note:** The calibration analysis result for model is relatively good, although the model tended to slightly overpredict in the rang of predicted probability <= 0.5.
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161775899-2f3a8adf-0b36-4fde-98b7-ca08358f0884.png">
+  <img width="600" height="400" src="https://user-images.githubusercontent.com/38151091/161775899-2f3a8adf-0b36-4fde-98b7-ca08358f0884.png">
 </p>
 
-eFigure 4. Calibration plot for the extreme gradient boosting tree algorithm.
+eFigure 3. Calibration plot for the random forest algorithm.
 
 **Note:** The calibration of the extreme gradient boosting trees algorithm is relatively well-balibrated for patients with low to moderate risk of ACU (<= 60%). The model tends to underestimate the risk for patients in a high risk area (>60%).
 
@@ -929,7 +929,27 @@ eFigure 4. Calibration plot for the extreme gradient boosting tree algorithm.
   <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/161776133-39564734-4b3a-4f99-b9b3-ce8bff812b7f.png">
 </p>
 
+eFigure 4. Calibration plot for the single hidden layer neural network algorithm.
+
+**Note:** The calibration plot suggests that the model generates reliable outputs only for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+
 eFigure 5. Calibration plot for the single hidden layer neural network algorithm.
+
+**Note:** The calibration plot suggests that the model generates reliable outputs only for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+
+eFigure 6. Calibration plot for the single hidden layer neural network algorithm.
+
+**Note:** The calibration plot suggests that the model generates reliable outputs only for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+
+eFigure 7. Calibration plot for the single hidden layer neural network algorithm.
+
+**Note:** The calibration plot suggests that the model generates reliable outputs only for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+
+eFigure 8. Calibration plot for the single hidden layer neural network algorithm.
+
+**Note:** The calibration plot suggests that the model generates reliable outputs only for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
+
+eFigure 9. Calibration plot for the single hidden layer neural network algorithm.
 
 **Note:** The calibration plot suggests that the model generates reliable outputs only for patients with a 25% to 60 % of AUC risk and tends to underestimate the risk for other patients.
 
@@ -942,26 +962,47 @@ Variable importance plots
 We present the result for the LRENP algorithm in our main paper and the rest ML algorithms here.
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477070-b7e2ffea-d128-4b41-8a41-0c1b309fd8e1.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182246929-e02da23f-075d-4414-a4e7-ddfa708d7db2.png">
 </p>
 
-eFigure 6. Important variables for the random forest algorithm.
+eFigure 10. Important variables for the random forest algorithm.
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477159-d51cdd9e-5b90-4607-8748-f0c8bea38855.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247034-b16e785e-6dbd-4ae6-b5a2-8ec9a9182934.png">
 </p>
 
-eFigure 7. Important variables for the extreme gradient boosting trees algorithm.
+eFigure 11. Important variables for support vector machine algorithm.
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477347-0608af07-5c35-4bb7-a32a-c063b5ba17cb.png">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247115-bbe64520-558d-4de2-90ce-abca45648ec9.png">
 </p>
 
-eFigrue 8. Important variables for the single hidden layer neural network algorithm.
+eFigrue 12. Important variables for the logistic regression with elastic net penalty algorithm.
 
+<p align="center">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247209-bb4cee6f-e4d3-4528-a7f3-cbb0f51be661.png">
+</p>
 
+eFigrue 13. Important variables for the single hidden layer neural network algorithm.
+
+<p align="center">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247307-e6d7612d-8295-4d25-b8bd-1c6444047fc1.png">
+</p>
+
+eFigrue 14. Important variables for the k nearest neighbors algorithm.
+
+<p align="center">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247380-7ce84ca6-c2d1-42d4-9dac-9c16223d5cff.png">
+</p>
+
+eFigrue 15. Important variables for the multivariate adaptive regression spline algorithm.
+
+<p align="center">
+  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247472-16cc4d1c-f9d3-45fe-a1fd-b77798c5b809.png">
+</p>
+
+eFigrue 16. Important variables for the decision tree algorithm.
 [Back to top](#table-of-contents)
-
 
 
 Shapely additive explanation plots
