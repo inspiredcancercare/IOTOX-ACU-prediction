@@ -900,7 +900,7 @@ We present calibration plots for all calibrated algorithms we examined on the pe
 
 
 <p align="center">
-  <img width="600" height="400" src="https://user-images.githubusercontent.com/38151091/182243845-fd4859c6-fe97-4680-8e20-ddaa0a5148e5.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182243845-fd4859c6-fe97-4680-8e20-ddaa0a5148e5.png">
 </p>
 
 eFigure 1. Calibration plot for the ECOG logistic regression algorithm.
@@ -909,7 +909,7 @@ eFigure 1. Calibration plot for the ECOG logistic regression algorithm.
 
 
 <p align="center">
-  <img width="600" height="400" src="https://user-images.githubusercontent.com/38151091/182244689-929a2167-c5dd-4fd0-9e6e-04ce3bfe4a3f.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182244689-929a2167-c5dd-4fd0-9e6e-04ce3bfe4a3f.png">
 </p>
 
 eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
@@ -918,8 +918,9 @@ eFigure 2. Calibration plot for the multivariate logistic regression algorithm.
 
 
 <p align="center">
-  <img width="600" height="400" src="https://user-images.githubusercontent.com/38151091/182247961-1c0f65cf-e627-47ff-b378-660da0019a45.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182251913-67d6367c-097b-4886-94eb-997b7e76804c.png">
 </p>
+
 
 eFigure 3. Calibration plot for the random forest algorithm.
 
@@ -927,7 +928,7 @@ eFigure 3. Calibration plot for the random forest algorithm.
 
 
 <p align="center">
-  <img width="500" height="400" src="https://user-images.githubusercontent.com/38151091/182248621-56760329-5565-43f2-b5fe-ea34d0986dca.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182248621-56760329-5565-43f2-b5fe-ea34d0986dca.png">
 </p>
 
 eFigure 4. Calibration plot for the support vector machine algorithm.
@@ -936,7 +937,7 @@ eFigure 4. Calibration plot for the support vector machine algorithm.
 
 
 <p align="center">
-  <img width="500" height="400" src="https://user-images.githubusercontent.com/38151091/182250954-a73e642b-1f5f-43d9-9ace-c395462877bd.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182250954-a73e642b-1f5f-43d9-9ace-c395462877bd.png">
 </p>
 
 eFigure 5. Calibration plot for the logistic regression with elastic net panelty algorithm.
@@ -944,7 +945,7 @@ eFigure 5. Calibration plot for the logistic regression with elastic net panelty
 **Note:** The calibration plot for the logistic regression with elastic net panelty is similar to the plot for support vector machine. The red line is sightly closer to the diagonal sold black line indicate a sightly better calibration as compared to the support vector machine.
 
 <p align="center">
-  <img width="500" height="400" src="https://user-images.githubusercontent.com/38151091/182249063-743b503a-eaa1-4baf-b075-912319ba094f.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182249063-743b503a-eaa1-4baf-b075-912319ba094f.png">
 </p>
 
 eFigure 6. Calibration plot for the single hidden layer neural network algorithm.
@@ -953,7 +954,7 @@ eFigure 6. Calibration plot for the single hidden layer neural network algorithm
 
 
 <p align="center">
-  <img width="450" height="400" src="https://user-images.githubusercontent.com/38151091/182249493-e2dbb4db-87e5-4a93-a7ad-694c01474243.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182249493-e2dbb4db-87e5-4a93-a7ad-694c01474243.png">
 </p>
 
 eFigure 7. Calibration plot for the k nearest neighbors algorithm.
@@ -962,7 +963,7 @@ eFigure 7. Calibration plot for the k nearest neighbors algorithm.
 
 
 <p align="center">
-  <img width="500" height="400" src="https://user-images.githubusercontent.com/38151091/182249866-0b817f7c-0066-40c0-a126-f7236cd70bb3.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182249866-0b817f7c-0066-40c0-a126-f7236cd70bb3.png">
 </p>
 
 eFigure 8. Calibration plot for the multivariate adaptive regression spline algorithm.
@@ -971,7 +972,7 @@ eFigure 8. Calibration plot for the multivariate adaptive regression spline algo
 
 
 <p align="center">
-  <img width="500" height="400" src="https://user-images.githubusercontent.com/38151091/182250294-9e0fa07f-6c27-4470-b8a4-aac3e514bef5.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182250294-9e0fa07f-6c27-4470-b8a4-aac3e514bef5.png">
 </p>
 
 eFigure 9. Calibration plot for the decision tree algorithm.
