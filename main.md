@@ -986,74 +986,116 @@ Variable importance plots
 --------------------------
 
 We present the result for the LRENP algorithm in our main paper and the rest ML algorithms here.
-
+<br>
+</br>
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182246929-e02da23f-075d-4414-a4e7-ddfa708d7db2.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182391122-8f597625-f430-43d7-92c3-05f4018114fe.png">
 </p>
-
 eFigure 10. Important variables for the random forest algorithm.
 
+<br>
+</br>
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247034-b16e785e-6dbd-4ae6-b5a2-8ec9a9182934.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182247034-b16e785e-6dbd-4ae6-b5a2-8ec9a9182934.png">
 </p>
-
 eFigure 11. Important variables for support vector machine algorithm.
 
+<br>
+</br>
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247115-bbe64520-558d-4de2-90ce-abca45648ec9.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182247115-bbe64520-558d-4de2-90ce-abca45648ec9.png">
 </p>
-
 eFigrue 12. Important variables for the logistic regression with elastic net penalty algorithm.
 
+<br>
+</br>
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247209-bb4cee6f-e4d3-4528-a7f3-cbb0f51be661.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182247209-bb4cee6f-e4d3-4528-a7f3-cbb0f51be661.png">
 </p>
-
 eFigrue 13. Important variables for the single hidden layer neural network algorithm.
 
+<br>
+</br>
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247307-e6d7612d-8295-4d25-b8bd-1c6444047fc1.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182247307-e6d7612d-8295-4d25-b8bd-1c6444047fc1.png">
 </p>
-
 eFigrue 14. Important variables for the k nearest neighbors algorithm.
 
+<br>
+</br>
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247380-7ce84ca6-c2d1-42d4-9dac-9c16223d5cff.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182247380-7ce84ca6-c2d1-42d4-9dac-9c16223d5cff.png">
 </p>
-
 eFigrue 15. Important variables for the multivariate adaptive regression spline algorithm.
 
+<br>
+</br>
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/182247472-16cc4d1c-f9d3-45fe-a1fd-b77798c5b809.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182247472-16cc4d1c-f9d3-45fe-a1fd-b77798c5b809.png">
 </p>
-
 eFigrue 16. Important variables for the decision tree algorithm.
+<br>
+</br>
+
 [Back to top](#table-of-contents)
+
 
 
 Shapely additive explanation plots
 --------------------------
 
 The result for the LRENP algorithm is included in the main test, and here are the results for other algorithms.
+<br></br>
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151478003-b6261d25-aa85-446d-9c1b-e5c9be3c86d5.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182392194-09c8a015-ee9c-49f4-8400-d3a792d90c51.png">
 </p>
-
-eFigure 9. Contributions of predictor values to the prediction of the random forest algorithm for the randomly selected case.
+eFigure 17. Contributions of predictor values to the prediction of the random forest algorithm for the randomly selected case.
+<br>
+</br>
 
 <p align="center">
-  <img width="460" height="400" src="https://user-images.githubusercontent.com/38151091/151477936-1214a44f-0ff5-4548-9e14-e93dd63cb9e9.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182392324-04812c60-d44b-4ab8-a34e-8e442ad9e751.png">
 </p>
+eFigrue 18. Contributions of predictor values to the prediction of the support vector machine for the randomly selected case.
 
-eFigrue 10. Contributions of predictor values to the prediction of the extreme gradient boosting trees algorithm for the randomly selected case.
+<br>
+</br>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38151091/182392736-333aa0b9-c9aa-4efc-9b10-066d2b6888d7.png">
+</p>
+eFigure 19. Contributions of predictor values to the prediction of the logistic regression with elastic net panelty algorithm for the randomly selected case.
+<br>
+</br>
 
 <p align="center">
-  <img width="460" height="400"  src="https://user-images.githubusercontent.com/38151091/151478076-1a389c00-f0bc-412f-b100-046a6250a6bc.png">
+  <img src="https://user-images.githubusercontent.com/38151091/182392807-206b609a-e14e-439b-8610-84b3440fac23.png">
 </p>
+eFigure 20. Contributions of predictor values to the prediction of the single hidden layer neural network  algorithm for the randomly selected case.
 
-eFigure 11. Contributions of predictor values to the prediction of the single hidden layer neural network  algorithm for the randomly selected case.
+<br>
+</br>
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38151091/182393044-6fa810e9-61ea-44be-83ec-ff57b84e83df.png">
+</p>
+eFigure 21. Contributions of predictor values to the prediction of the k nearest neighbor algorithm for the randomly selected case.
+
+<br>
+</br>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38151091/182393150-95fb58bc-7fdd-4f74-a7cf-954b3c483790.png">
+</p>
+eFigure 22. Contributions of predictor values to the prediction of the multivariate adaptive regression spline algorithm for the randomly selected case.
+
+<br>
+</br>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/38151091/182393320-8039d9aa-c48d-4d8b-be2f-dc1d63cb64e2.png">
+</p>
+eFigure 22. Contributions of predictor values to the prediction of the decision tree algorithm for the randomly selected case.
 
 
 [Back to top](#table-of-contents)
