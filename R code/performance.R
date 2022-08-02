@@ -167,38 +167,178 @@ xgb_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
                                     as.matrix(xgb_predictions_periCOVID$cali_pred_TRUE))
 
 #Single hidden layer neural network
-thres<- shlnn_thres$threshold
+thres<- dt_thres$threshold
 
-shlnn_predictions$new_class<- ifelse(shlnn_predictions$cali_pred_TRUE>=thres, 
+dt_predictions$new_class<- ifelse(dt_predictions$cali_pred_TRUE>=thres, 
                                      "TRUE", "FALSE")
 
-obs_class<- shlnn_predictions %>% pull(outcome)
+obs_class<- dt_predictions %>% pull(outcome)
 
-cali_pred_class <- as.factor(shlnn_predictions$new_class)
+cali_pred_class <- as.factor(dt_predictions$new_class)
 
-shlnn_cali_cm <- confusionMatrix(cali_pred_class,
+dt_cali_cm <- confusionMatrix(cali_pred_class,
                                  obs_class, 
                                  positive = "TRUE")
 
-shlnn_cali_auc <- pROC::roc(as.vector(obs_class),
-                            as.matrix(shlnn_predictions$cali_pred_TRUE))
+dt_cali_auc <- pROC::roc(as.vector(obs_class),
+                            as.matrix(dt_predictions$cali_pred_TRUE))
 
 
-shlnn_predictions_periCOVID <- my_prediction(shlnn_workflow, df_periCOVID , outcome)
+dt_predictions_periCOVID <- my_prediction(dt_workflow, df_periCOVID , outcome)
 
-shlnn_predictions_periCOVID$new_class<- ifelse(shlnn_predictions_periCOVID$cali_pred_TRUE>=thres, 
+dt_predictions_periCOVID$new_class<- ifelse(dt_predictions_periCOVID$cali_pred_TRUE>=thres, 
                                                "TRUE", "FALSE")
 
-obs_class_periCOVID <- shlnn_predictions_periCOVID %>% pull(outcome)
+obs_class_periCOVID <- dt_predictions_periCOVID %>% pull(outcome)
 
-cali_pred_class <- as.factor(shlnn_predictions_periCOVID$new_class)
+cali_pred_class <- as.factor(dt_predictions_periCOVID$new_class)
 
-shlnn_cali_cm_periCOVID <- confusionMatrix(cali_pred_class,
+dt_cali_cm_periCOVID <- confusionMatrix(cali_pred_class,
                                            obs_class_periCOVID, 
                                            positive = "TRUE")
 
-shlnn_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
-                                      as.matrix(shlnn_predictions_periCOVID$cali_pred_TRUE))
+dt_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
+                                      as.matrix(dt_predictions_periCOVID$cali_pred_TRUE))
+
+#Support vector machine
+thres<- svm_thres$threshold
+
+svm_predictions$new_class<- ifelse(svm_predictions$cali_pred_TRUE>=thres, 
+                                     "TRUE", "FALSE")
+
+obs_class<- svm_predictions %>% pull(outcome)
+
+cali_pred_class <- as.factor(svm_predictions$new_class)
+
+svm_cali_cm <- confusionMatrix(cali_pred_class,
+                                 obs_class, 
+                                 positive = "TRUE")
+
+svm_cali_auc <- pROC::roc(as.vector(obs_class),
+                            as.matrix(svm_predictions$cali_pred_TRUE))
+
+
+svm_predictions_periCOVID <- my_prediction(svm_workflow, df_periCOVID , outcome)
+
+svm_predictions_periCOVID$new_class<- ifelse(svm_predictions_periCOVID$cali_pred_TRUE>=thres, 
+                                               "TRUE", "FALSE")
+
+obs_class_periCOVID <- svm_predictions_periCOVID %>% pull(outcome)
+
+cali_pred_class <- as.factor(svm_predictions_periCOVID$new_class)
+
+svm_cali_cm_periCOVID <- confusionMatrix(cali_pred_class,
+                                           obs_class_periCOVID, 
+                                           positive = "TRUE")
+
+svm_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
+                                      as.matrix(svm_predictions_periCOVID$cali_pred_TRUE))
+
+
+#k nearest neighbors
+thres<- knn_thres$threshold
+
+knn_predictions$new_class<- ifelse(knn_predictions$cali_pred_TRUE>=thres, 
+                                     "TRUE", "FALSE")
+
+obs_class<- knn_predictions %>% pull(outcome)
+
+cali_pred_class <- as.factor(knn_predictions$new_class)
+
+knn_cali_cm <- confusionMatrix(cali_pred_class,
+                                 obs_class, 
+                                 positive = "TRUE")
+
+knn_cali_auc <- pROC::roc(as.vector(obs_class),
+                            as.matrix(knn_predictions$cali_pred_TRUE))
+
+
+knn_predictions_periCOVID <- my_prediction(knn_workflow, df_periCOVID , outcome)
+
+knn_predictions_periCOVID$new_class<- ifelse(knn_predictions_periCOVID$cali_pred_TRUE>=thres, 
+                                               "TRUE", "FALSE")
+
+obs_class_periCOVID <- knn_predictions_periCOVID %>% pull(outcome)
+
+cali_pred_class <- as.factor(knn_predictions_periCOVID$new_class)
+
+knn_cali_cm_periCOVID <- confusionMatrix(cali_pred_class,
+                                           obs_class_periCOVID, 
+                                           positive = "TRUE")
+
+knn_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
+                                      as.matrix(knn_predictions_periCOVID$cali_pred_TRUE))
+
+
+#Multivariate adaptive regression spline
+thres<- mars_thres$threshold
+
+mars_predictions$new_class<- ifelse(mars_predictions$cali_pred_TRUE>=thres, 
+                                     "TRUE", "FALSE")
+
+obs_class<- mars_predictions %>% pull(outcome)
+
+cali_pred_class <- as.factor(mars_predictions$new_class)
+
+mars_cali_cm <- confusionMatrix(cali_pred_class,
+                                 obs_class, 
+                                 positive = "TRUE")
+
+mars_cali_auc <- pROC::roc(as.vector(obs_class),
+                            as.matrix(mars_predictions$cali_pred_TRUE))
+
+
+mars_predictions_periCOVID <- my_prediction(mars_workflow, df_periCOVID , outcome)
+
+mars_predictions_periCOVID$new_class<- ifelse(mars_predictions_periCOVID$cali_pred_TRUE>=thres, 
+                                               "TRUE", "FALSE")
+
+obs_class_periCOVID <- mars_predictions_periCOVID %>% pull(outcome)
+
+cali_pred_class <- as.factor(mars_predictions_periCOVID$new_class)
+
+mars_cali_cm_periCOVID <- confusionMatrix(cali_pred_class,
+                                           obs_class_periCOVID, 
+                                           positive = "TRUE")
+
+mars_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
+                                      as.matrix(mars_predictions_periCOVID$cali_pred_TRUE))
+
+
+#Decision tree
+thres<- dt_thres$threshold
+
+dt_predictions$new_class<- ifelse(dt_predictions$cali_pred_TRUE>=thres, 
+                                     "TRUE", "FALSE")
+
+obs_class<- dt_predictions %>% pull(outcome)
+
+cali_pred_class <- as.factor(dt_predictions$new_class)
+
+dt_cali_cm <- confusionMatrix(cali_pred_class,
+                                 obs_class, 
+                                 positive = "TRUE")
+
+dt_cali_auc <- pROC::roc(as.vector(obs_class),
+                            as.matrix(dt_predictions$cali_pred_TRUE))
+
+
+dt_predictions_periCOVID <- my_prediction(dt_workflow, df_periCOVID , outcome)
+
+dt_predictions_periCOVID$new_class<- ifelse(dt_predictions_periCOVID$cali_pred_TRUE>=thres, 
+                                               "TRUE", "FALSE")
+
+obs_class_periCOVID <- dt_predictions_periCOVID %>% pull(outcome)
+
+cali_pred_class <- as.factor(dt_predictions_periCOVID$new_class)
+
+dt_cali_cm_periCOVID <- confusionMatrix(cali_pred_class,
+                                           obs_class_periCOVID, 
+                                           positive = "TRUE")
+
+dt_cali_auc_periCOVID <- pROC::roc(as.vector(obs_class_periCOVID),
+                                      as.matrix(dt_predictions_periCOVID$cali_pred_TRUE))
+
 
 ####McNamer's test for model comparison####
 #ML vs logistic regression
@@ -212,7 +352,7 @@ roc.test(obs_class, data.frame(lrenp_predictions$cali_pred_TRUE,
 
 
 roc.test(obs_class_periCOVID, data.frame(lrenp_predictions_periCOVID$cali_pred_TRUE,
-                               lr_predictions_periCOVID$cali_pred_TRUE),
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided", 
          boot.stratified=TRUE)
@@ -225,7 +365,7 @@ roc.test(obs_class, data.frame(rf_predictions$cali_pred_TRUE,
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(rf_predictions_periCOVID$cali_pred_TRUE,
-                               lr_predictions_periCOVID$cali_pred_TRUE),
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided", 
          boot.stratified=TRUE)
@@ -238,11 +378,10 @@ roc.test(obs_class, data.frame(xgb_predictions$cali_pred_TRUE,
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(xgb_predictions_periCOVID$cali_pred_TRUE,
-                               lr_predictions_periCOVID$cali_pred_TRUE),
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided",
          boot.stratified=TRUE)
-
 
 #shlnn vs lr
 roc.test(obs_class, data.frame(shlnn_predictions$cali_pred_TRUE,
@@ -252,7 +391,59 @@ roc.test(obs_class, data.frame(shlnn_predictions$cali_pred_TRUE,
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(shlnn_predictions_periCOVID$cali_pred_TRUE,
-                               lr_predictions_periCOVID$cali_pred_TRUE),
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#svm vs lr
+roc.test(obs_class, data.frame(svm_predictions$cali_pred_TRUE,
+                               lr_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(svm_predictions_periCOVID$cali_pred_TRUE,
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#knn vs lr
+roc.test(obs_class, data.frame(knn_predictions$cali_pred_TRUE,
+                               lr_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(knn_predictions_periCOVID$cali_pred_TRUE,
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#mars vs lr
+roc.test(obs_class, data.frame(mars_predictions$cali_pred_TRUE,
+                               lr_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(mars_predictions_periCOVID$cali_pred_TRUE,
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#dt vs lr
+roc.test(obs_class, data.frame(dt_predictions$cali_pred_TRUE,
+                               lr_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(dt_predictions_periCOVID$cali_pred_TRUE,
+                                         lr_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided", 
          boot.stratified=TRUE)
@@ -267,7 +458,7 @@ roc.test(obs_class, data.frame(lrenp_predictions$cali_pred_TRUE,
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(lrenp_predictions_periCOVID$cali_pred_TRUE,
-                               ecog_predictions_periCOVID$cali_pred_TRUE),
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided", 
          boot.stratified=TRUE)
@@ -280,7 +471,7 @@ roc.test(obs_class, data.frame(rf_predictions$cali_pred_TRUE,
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(rf_predictions_periCOVID$cali_pred_TRUE,
-                               ecog_predictions_periCOVID$cali_pred_TRUE),
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided", 
          boot.stratified=TRUE)
@@ -293,11 +484,10 @@ roc.test(obs_class, data.frame(xgb_predictions$cali_pred_TRUE,
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(xgb_predictions_periCOVID$cali_pred_TRUE,
-                               ecog_predictions_periCOVID$cali_pred_TRUE),
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided", 
          boot.stratified=TRUE)
-
 
 #shlnn vs ecog
 roc.test(obs_class, data.frame(shlnn_predictions$cali_pred_TRUE,
@@ -307,7 +497,59 @@ roc.test(obs_class, data.frame(shlnn_predictions$cali_pred_TRUE,
          boot.stratified=TRUE)
 
 roc.test(obs_class_periCOVID, data.frame(shlnn_predictions_periCOVID$cali_pred_TRUE,
-                               ecog_predictions_periCOVID$cali_pred_TRUE),
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#svm vs ecog
+roc.test(obs_class, data.frame(svm_predictions$cali_pred_TRUE,
+                               ecog_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(svm_predictions_periCOVID$cali_pred_TRUE,
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#knn vs ecog
+roc.test(obs_class, data.frame(knn_predictions$cali_pred_TRUE,
+                               ecog_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(knn_predictions_periCOVID$cali_pred_TRUE,
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#mars vs ecog
+roc.test(obs_class, data.frame(mars_predictions$cali_pred_TRUE,
+                               ecog_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(mars_predictions_periCOVID$cali_pred_TRUE,
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+#dt vs ecog
+roc.test(obs_class, data.frame(dt_predictions$cali_pred_TRUE,
+                               ecog_predictions$cali_pred_TRUE),
+         method="delong", 
+         alternative = "two.sided", 
+         boot.stratified=TRUE)
+
+roc.test(obs_class_periCOVID, data.frame(dt_predictions_periCOVID$cali_pred_TRUE,
+                                         ecog_predictions_periCOVID$cali_pred_TRUE),
          method="delong", 
          alternative = "two.sided", 
          boot.stratified=TRUE)
