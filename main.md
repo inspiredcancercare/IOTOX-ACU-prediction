@@ -282,18 +282,8 @@ Another approach we used to explain our algorithms is an example-based explanati
 Candidate predictors
 =================================================
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
-.tg .tg-zr06{background-color:#FFF;text-align:left;vertical-align:middle}
-.tg .tg-kcps{background-color:#FFF;text-align:left;vertical-align:bottom}
-.tg .tg-f4yw{background-color:#FFF;text-align:center;vertical-align:middle}
-.tg .tg-cwad{background-color:#FFF;color:#24292F;text-align:left;vertical-align:middle}
-</style>
-<table class="tg">
+eTable 2. Candidate predictors
+<table>
 <thead>
   <tr>
     <th class="tg-zr06">Category</th>
@@ -817,7 +807,7 @@ Candidate predictors
 
 Sample characteristics
 -----------------------
-eTable 1: Patient characteristic description and comparison by sample 
+eTable 3: Patient characteristic description and comparison by sample 
 
 | Variables |  | Pre-COVID    sample<br>    <br>(N = 4,010) |  | Peri-COVID    sample<br>    <br>(N = 3,950) |  | P-value |
 |---|---|---|---|---|---|---|
@@ -886,7 +876,7 @@ eTable 1: Patient characteristic description and comparison by sample
 
 Model performance on pre COVID testing sample
 ----------------------
-eTable 2: Model performance on pre-COVID testing sample (N = 802) 
+eTable 4: Model performance on pre-COVID testing sample (N = 802) 
 |     <br>Metric     |     <br>XGBT     |     <br>RF     |     <br>SVM     |     <br>LRENP     |     <br>SHLNN     |     <br>KNN     |     <br>MARS     |     <br>DT     |     <br>LR     |     <br>ECOG     |
 |---|---|---|---|---|---|---|---|---|---|---|
 |    <br>AUROC<br>   <br>(95% CI)    |    <br>.67<br>   (.63, .71)    |    <br>.65<br>   (.61, .69)    |    <br>.66<br>   (.63, .70)    |    <br>.65<br>   (.61, .69)    |    <br>.65<br>   (.61, .69)    |    <br>.64<br>   (.60, .68)    |    <br>.64<br>   (.60, .68)    |    <br>.57<br>   (.54, .61)    |    <br>.64<br>   (.60, .68)    |    <br>.60<br>   (.55, .64)    |
