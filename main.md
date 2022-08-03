@@ -282,523 +282,535 @@ Another approach we used to explain our algorithms is an example-based explanati
 Candidate predictors
 =================================================
 
- <table>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-zr06{background-color:#FFF;text-align:left;vertical-align:middle}
+.tg .tg-kcps{background-color:#FFF;text-align:left;vertical-align:bottom}
+.tg .tg-f4yw{background-color:#FFF;text-align:center;vertical-align:middle}
+.tg .tg-cwad{background-color:#FFF;color:#24292F;text-align:left;vertical-align:middle}
+</style>
+<table class="tg">
 <thead>
   <tr>
-    <th>Category</th>
-    <th>Name</th>
-    <th>Value</th>
+    <th class="tg-zr06">Category</th>
+    <th class="tg-kcps">Name</th>
+    <th class="tg-kcps">Value</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td rowspan="7">Basic information</td>
-    <td>Age</td>
-    <td>Numeric</td>
+    <td class="tg-f4yw" rowspan="7">Basic information</td>
+    <td class="tg-cwad">Age</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Gender</td>
-    <td>Male, Female</td>
+    <td class="tg-cwad">Gender</td>
+    <td class="tg-cwad">Male, Female</td>
   </tr>
   <tr>
-    <td>Marital status</td>
-    <td>Legally separated, Married,&nbsp;&nbsp;&nbsp;Other, Significant other, Single, Widowed, Divorced</td>
+    <td class="tg-cwad">Marital status</td>
+    <td class="tg-cwad">Married, Other, Single</td>
   </tr>
   <tr>
-    <td>Smoking status</td>
-    <td>Current Every Day Smoker,&nbsp;&nbsp;&nbsp;Current Some Day Smoker, Former Smoker, Heavy Tobacco Smoker, Light Tobacco&nbsp;&nbsp;&nbsp;Smoker, Never Smoker, Passive Smoke Exposure - Never Smoker, Smoker, Current&nbsp;&nbsp;&nbsp;Status Unknown</td>
+    <td class="tg-cwad">Smoking status</td>
+    <td class="tg-cwad">Current smoker, Former smoker, Never smoker,</td>
   </tr>
   <tr>
-    <td>Alcohol use</td>
-    <td>Yes, Not current, Never, No</td>
+    <td class="tg-cwad">Alcohol use</td>
+    <td class="tg-cwad">Yes, Not current, No</td>
   </tr>
   <tr>
-    <td>ECOG</td>
-    <td>0, 1, 2, 3, 4</td>
+    <td class="tg-cwad">ECOG last, mean, sd</td>
+    <td class="tg-cwad">0, 1, 2, 3, 4. Mean ECOG was not used due to high correlation</td>
   </tr>
   <tr>
-    <td>Area deprivation index -&nbsp;&nbsp;&nbsp;national</td>
-    <td>0 - 99, GQ, GQ-PH, KVM, PH</td>
+    <td class="tg-cwad">Area deprivation index - national</td>
+    <td class="tg-cwad">0 - 99, GQ, GQ-PH, KVM, PH</td>
   </tr>
   <tr>
-    <td rowspan="2">Treatment</td>
-    <td>RT 30 days before</td>
-    <td>True, False</td>
+    <td class="tg-f4yw" rowspan="2">Treatment</td>
+    <td class="tg-cwad">RT 30 days before</td>
+    <td class="tg-cwad">True, False</td>
   </tr>
   <tr>
-    <td>Immune checkpoint inhibitor agent</td>
-    <td>Avelumab, Durvalumab, Nivolumab, Pembrolizumab, Cemiplimab-rwlc,&nbsp;&nbsp;&nbsp;Atezolizumab</td>
+    <td class="tg-kcps">Immune checkpoint inhibitor agent</td>
+    <td class="tg-kcps">Avelumab, Durvalumab, Nivolumab, Pembrolizumab, Cemiplimab-rwlc, Atezolizumab</td>
   </tr>
   <tr>
-    <td rowspan="3">Cancer information</td>
-    <td>Site</td>
-    <td>Nominal </td>
+    <td class="tg-f4yw" rowspan="3">Cancer information</td>
+    <td class="tg-kcps">Site</td>
+    <td class="tg-cwad">Nominal </td>
   </tr>
   <tr>
-    <td>Histology</td>
-    <td>Nominal </td>
+    <td class="tg-kcps">Histology</td>
+    <td class="tg-cwad">Nominal </td>
   </tr>
   <tr>
-    <td>Metastasis status</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Metastasis status</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td rowspan="41">Medical history</td>
-    <td>Anxiety</td>
-    <td>Yes, No</td>
+    <td class="tg-f4yw" rowspan="41">Medical histories</td>
+    <td class="tg-kcps">Anxiety</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Asthma</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Asthma</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Atrioventricular septal defect</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Atrioventricular septal defect</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Atrial fibrillaton</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Atrial fibrillaton</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Bronchiolitis obliterans organizing pneumonia</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Bronchiolitis obliterans organizing pneumonia</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Cardiac arrhythmia</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Cardiac arrhythmia</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Cerebrovascular accident</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Cerebrovascular accident</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Cerebrovascular disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Cerebrovascular disease</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Chronic kidney disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Chronic kidney disease</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Chronic obstructive pulmonary disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Chronic obstructive pulmonary disease</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Chronic pulmonary disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Chronic pulmonary disease not asthma</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Congestive heart failure</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Congestive heart failure</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Coronary artery disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Coronary artery disease</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Deep vein thrombosis</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Deep vein thrombosis</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Dementia</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Dementia</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Depression</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Depression</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Diabetes insipidus</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Diabetes insipidus</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Diabetes mellitus</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Diabetes mellitus</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>ESRD</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">ESRD</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>ESRD SF</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">ESRD SF</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Gerd</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Gerd</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Hemiplegia Paraplegia</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Hemiplegia Paraplegia</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Human immunodeficiency virus</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Human immunodeficiency virus</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Hypertension</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Hypertension</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Hypogammaglobulinemia</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Hypogammaglobulinemia</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Hypothyroidism</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Hypothyroidism</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Immune related adverse events pneumonitis</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Immune related adverse events pneumonitis</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Cryptogenic organizing pneumonia</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Cryptogenic organizing pneumonia</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Liver disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Liver disease</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Mild liver disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Mild liver disease</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Moderate or severe liver disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Moderate or severe liver disease</td>
+    <td class="tg-cwad">Not used due to high correlation</td>
   </tr>
   <tr>
-    <td>Myocardial infarction</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Myocardial infarction</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Neuropathy</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Neuropathy</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Obesity</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Obesity</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Obstructive sleep apnea</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Obstructive sleep apnea</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Peripheral vascular disease</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Peripheral vascular disease</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Pneumonia</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Pneumonia</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Psychosis</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Psychosis</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Pulmonary embolism</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Pulmonary embolism</td>
+    <td class="tg-cwad">Yes, No</td>
   </tr>
   <tr>
-    <td>Pulmonary hypertension</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Pulmonary hypertension</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>Rheumatoid arthritis</td>
-    <td>Yes, No</td>
+    <td class="tg-kcps">Rheumatoid arthritis</td>
+    <td class="tg-cwad">Not used due to near zero variance</td>
   </tr>
   <tr>
-    <td rowspan="65">Laboratory</td>
-    <td>ALT last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-f4yw" rowspan="65">Laboratory</td>
+    <td class="tg-kcps">ALT last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>AST last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">AST last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Albumin Lvl last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Albumin Lvl last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Alk Phos last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Alk Phos last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Anion Gap last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Anion Gap last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>BUN last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">BUN last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Basophil Abs last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Basophil Abs last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Basophil pct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Basophil pct last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Bili Direct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Bili Direct last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Bili Indirect last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Bili Indirect last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Bili Total last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Bili Total last, mean, SD</td>
+    <td class="tg-cwad">Numeric, sd Bili Total was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>CO2 last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">CO2 last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Calcium Lvl last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Calcium Lvl last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Chloride last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Chloride last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Creatinine last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Creatinine last, mean, SD</td>
+    <td class="tg-cwad">Numeric, last Creatinine was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Eosinophil Abs last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Eosinophil Abs last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Eosinophil pct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Eosinophil pct last, mean, SD</td>
+    <td class="tg-cwad">Numeric, last and mean Eosinophil pcts were not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Glucose Level last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Glucose Level last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Hct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Hct last, mean, SD</td>
+    <td class="tg-cwad">Numeric, sd Hct was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Hgb last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Hgb last, mean, SD</td>
+    <td class="tg-cwad">Not used due to high correlation</td>
   </tr>
   <tr>
-    <td>IGRE pct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">IGRE pct last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>IG Abs last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">IG Abs last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>INRBC last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">INRBC last, mean, SD</td>
+    <td class="tg-cwad">Numeric, last INRBC was not used due to near zero variance</td>
   </tr>
   <tr>
-    <td>LDH last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">LDH last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Lymphocyte Abs last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Lymphocyte Abs last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Lymphocyte pct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Lymphocyte pct last, mean, SD</td>
+    <td class="tg-cwad">Numeric, last Lymphocyte pct was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>MCHC last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">MCHC last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>MCH last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">MCH last, mean, SD</td>
+    <td class="tg-cwad">Numeric, mean MCH was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>MCV last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">MCV last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>MPV last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">MPV last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Magnesium last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Magnesium last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Monocyte Abs last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Monocyte Abs last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Monocyte pct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Monocyte pct last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Neutrophil Abs last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Neutrophil Abs last, mean, SD</td>
+    <td class="tg-cwad">Numeric, last and mean Neutrophil Abs were not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Neutrophil pct last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Neutrophil pct last, mean, SD</td>
+    <td class="tg-cwad">Numeric, mean Neutrophil pct was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Phosphorus last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Phosphorus last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Platelet count last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Platelet count last, mean, SD</td>
+    <td class="tg-cwad">Numeric, mean Platelet count was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Potassium Lvl last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Potassium Lvl last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>RBC last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">RBC last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>RDW CV last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">RDW CV last, mean, SD</td>
+    <td class="tg-cwad">Numeric, sd RDW CV was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>RDW SD last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">RDW SD last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Sodium Lvl last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Sodium Lvl last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>T4 Free last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">T4 Free last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>TSH last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">TSH last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Total Protein last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Total Protein last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>WBC last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">WBC last, mean, SD</td>
+    <td class="tg-cwad">Numeric, sd WBC was not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Creatinine clear last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Creatinine clear last, mean, SD</td>
+    <td class="tg-cwad">Numeric, mean and sd Creatinine clear were not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>eGFR AA last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">eGFR AA last, mean, SD</td>
+    <td class="tg-cwad">Numeric, last and mean eGFR AA were not used due to high correlation.</td>
   </tr>
   <tr>
-    <td>Cortisol last, mean,SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">Cortisol last, mean,SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>Free T3 last, mean,SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">Free T3 last, mean,SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>INR last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">INR last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>Lipase Lvl last, mean,SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">Lipase Lvl last, mean,SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>POC Crea last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">POC Crea last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>POC Glucose last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">POC Glucose last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>POC creatinine clear last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">POC creatinine clear last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>T3 Total last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">T3 Total last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>Total Cells last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">Total Cells last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>UA Protein last, mean SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">UA Protein last, mean SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>UA RBC last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">UA RBC last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>UA Spec Grav last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">UA Spec Grav last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>UA WBC last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">UA WBC last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>UA pH last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">UA pH last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>Uric Acid last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">Uric Acid last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>aPTT last, , mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">aPTT last, , mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td>POC Glucose last, mean, SD</td>
-    <td>Removed due to high missing rate</td>
+    <td class="tg-kcps">POC Glucose last, mean, SD</td>
+    <td class="tg-cwad">Removed due to high missing rate</td>
   </tr>
   <tr>
-    <td rowspan="7">Vital Sign</td>
-    <td>Pain last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-f4yw" rowspan="7">Vital Sign</td>
+    <td class="tg-kcps">Pain last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Pulse last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Pulse last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Respiration last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Respiration last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Spo2 last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Spo2 last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Body temperature last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Body temperature last, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Diastolic blood pressurelast, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Diastolic blood pressurelast, mean, SD</td>
+    <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td>Systolic blood pressure last, mean, SD</td>
-    <td>Numeric</td>
+    <td class="tg-kcps">Systolic blood pressure last, mean, SD</td>
+    <td class="tg-cwad">Numeric, mean SBP was not used due to high correlation.</td>
   </tr>
 </tbody>
 </table>
+
 
 [Back to top](#table-of-contents)
 
