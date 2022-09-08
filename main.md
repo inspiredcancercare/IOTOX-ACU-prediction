@@ -1046,7 +1046,7 @@ eFigrue 16. Important variables for the decision tree algorithm.
 Shapely additive explanation plots
 --------------------------
 
-The result for the LRENP algorithm is included in the main test, and here are the results for other algorithms.
+The result for the XGBT algorithm is included in the main test, and here are the results for other algorithms.
 <br></br>
 
 <p align="center">
