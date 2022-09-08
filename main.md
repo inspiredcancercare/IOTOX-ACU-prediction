@@ -987,7 +987,7 @@ eFigure 9. Calibration plot for the decision tree algorithm.
 Variable importance plots
 --------------------------
 
-We present the result for the LRENP algorithm in our main paper and the rest ML algorithms here.
+We present the result for the XGBT algorithm in our main paper and other ML algorithms here.
 <br>
 </br>
 <p align="center">
