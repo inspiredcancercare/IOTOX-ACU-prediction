@@ -860,7 +860,7 @@ eTable 3: Patient characteristic description and comparison by sample
 |  | Unknown | 341 | 8.5% | 395 | 10.0% |  |
 | 30 days prior   RT | Yes | 268 | 6.7% | 270 | 6.8% | .81 |
 |  | No | 3,742 | 93.3% | 3,680 | 93.2% |  |
-| ICI agent | Atezolizumab | 253 | 6.3% | 332 | 8.4 | <.01 |
+| ICI agent | Atezolizumab | 253 | 6.3% | 332 | 8.4% | <.01 |
 |  | Avelumab | 42 | 1.0% | 53 | 1.3% |  |
 |  | Cemiplimab-rwlc | 31 | 0.8% | 70 | 1.8% |  |
 |  | Durvalumab | 115 | 2.9% | 149 | 3.8% |  |
