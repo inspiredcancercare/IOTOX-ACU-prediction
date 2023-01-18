@@ -1097,7 +1097,7 @@ eFigure 22. Contributions of predictor values to the prediction of the multivari
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182393320-8039d9aa-c48d-4d8b-be2f-dc1d63cb64e2.png">
 </p>
-eFigure 22. Contributions of predictor values to the prediction of the decision tree algorithm for the randomly selected case.
+eFigure 23. Contributions of predictor values to the prediction of the decision tree algorithm for the randomly selected case.
 
 
 [Back to top](#table-of-contents)
