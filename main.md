@@ -27,11 +27,11 @@ We applied the following data preparation techniques to prepare the data before 
   <li>Numeric predictors</li>
 		<dd>- Log or Yeo-Johnson transformation to enhance normality</dd>
 		<dd>- Rescaling the predictors to make all predictors having 0 mean and standard deviation 1</dd>
-		<dd>- Missing data imputation using median of each predictor </dd>
+		<dd>- Missing data imputation using the median of each predictor </dd>
   <li>Categorical predictors</li>
 		<dd>- Lumping classes occurring in fewer than 10% of the training sample to an “Other” category for each predictor to reduce data complexity</dd>
 		<dd>- One-hot encoding to convert each predictor into a binary term for each class of the original data</dd>
-		<dd>- Missing data imputation using mode of each predictor </dd>
+		<dd>- Missing data imputation using the mode of each predictor </dd>
   <li>All predictors</li>
 	<dd>- Removing predictors that contain only a single value or have most traning sample with the same value</dd>
 	<dd>- Removing predictors that have large absolute correlations (>=0.90) with other predictors </dd>
@@ -71,7 +71,7 @@ split<-initial_split(db, prop = .8) #where db is the pre-COVID sample
 df_train<-training(split)
 df_test<-testing(split)
 
-##### set a recipe for data prepraration ####
+##### set a recipe for data preparation ####
 df_recipe<-recipe(formula, df_train) %>%
    step_medianimpute(recipes::all_numeric(), -recipes::all_outcomes(), id = "median_imputation") %>%
    step_modeimpute(recipes::all_nominal(), -recipes::all_outcomes(), id = "mode_imputation") %>%
@@ -96,16 +96,16 @@ cvfolds<-vfold_cv(df_train, v = 10, strata = outcome)
  Model training and optimization
  -------------------------------
  
-We trained four ML algorithms, including logistic regression with elastic net penalty (LRENP), random forest (RF), extreme gradient boosting trees (XGBT), and single hidden layer neural network (SHLNN), using the per-COVID training sample. We used the following steps to determine the best values of hyperparameters for each algorithm alongside a 10-fold cross-validation process. 
+We trained eight ML algorithms, including logistic regression with elastic net penalty (LRENP), random forest (RF), extreme gradient boosting trees (XGBT), support vector machine (SVM), decision tree (DT), k-nearest neighbors (kNN), multivariate adaptive regression splines (MARS) and single hidden layer neural network (SHLNN), using the per-COVID training sample. We used the following steps to determine the best values of hyperparameters for each algorithm alongside a 10-fold cross-validation process. 
 
 1. Trained and evaluated 30 initial models using a random search approach from predefined search spaces (eTable 1)
 2. Fitted a Gaussian process (GP) model using initial models' hyperparameter values as predictors and model performance (AUROC) as outcomes
 3. Projected potentially optimal hyperparameter values using the GP model
 4. Created a new model with the hyperparameter values   
 5. Compared the new model with the averaging AUROC of the initial models.
-6. Repeated step 3-5 until 40 iterations or no model improvement in 20 consecutive models were reached
+6. Repeated steps 3-5 until 40 iterations or no model improvement in 20 consecutive models were reached
 
-We used [R tidymodels package version 0.1.0](https://www.tidymodels.org/) to develop all models including the multivariate and univariate logistic regression using Eastern Cooperative Oncology Group (ECOG) as the only predictor. No model optimization was performed for the the multivariate and univariate ECOG logistic regression R code for all six models is available in [modeling.R](https://github.com/inspiredcancercare/IOTOXACU/blob/5451babcba443dd4e87b6e3a3b20889a641b6f91/modeling.R).
+We used [R tidymodels package version 0.1.0](https://www.tidymodels.org/) to develop all models including the multivariate and univariate logistic regression using Eastern Cooperative Oncology Group (ECOG) as the only predictor. No model optimization was performed for the the multivariate and univariate ECOG logistic regression R code for all models is available in [modeling.R](https://github.com/inspiredcancercare/IOTOXACU/blob/5451babcba443dd4e87b6e3a3b20889a641b6f91/modeling.R).
 
 eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and optimal values
  
@@ -230,7 +230,7 @@ eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and o
 		<td rowspan=3>DT</td>
 		<td> cost_complexity </td>
 		<td> 10^-10 – 10^-1</td>
-		<td> 00.000242 </td>
+		<td> 0.000242 </td>
         	</tr>
 <tr>
 		 <td> tree_depth </td>
@@ -243,7 +243,7 @@ eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and o
 		 <td> 7 </td>
 	    </tr>
     	<tr>
-		<td colspan=4> <b>Abbreviations:</b> ; DT: decision tree; KNN: k-nearest neighbors; LR: logistic regression; LRENP: logistic regression with elastic net penalty; MARS: multivariate adaptive regression splines; RF: random forest; SHLNN: single hidden layer neural network; SVM: support vector machine; XGBT: extreme gradient boosting trees.</td>
+		<td colspan=4> <b>Abbreviations:</b> DT: decision tree; KNN: k-nearest neighbors; LR: logistic regression; LRENP: logistic regression with elastic net penalty; MARS: multivariate adaptive regression splines; RF: random forest; SHLNN: single hidden layer neural network; SVM: support vector machine; XGBT: extreme gradient boosting trees.</td>
 	    </tr>
 	</tbody>
 </table>
@@ -255,7 +255,7 @@ eTable 1. Hyperparameters for each algorithm, corresponding search spaces, and o
 Model calibration and risk threshold determination
 --------------------------------------------------
 
-After creating ML models, we use Platt scaling method to create a calibration model using the pre-COVID training sample following steps below for each model:
+After creating ML models, we use the Platt scaling method to create a calibration model using the pre-COVID testing sample following steps below for each model:
 
 1. Applied the model to make predictions on the sample and extracted the predicted probabilities generated by the model
 2. Fitted a logistic regression model to correlate the probabilities and observed outcomes (true classes) 
@@ -269,7 +269,7 @@ We provide our code for model calibration and risk threshold determination in [r
 
 Model exmination and explanation
 --------------------------------
-To examine model performance, we calculated performance metrics including area under the receiver operating charactistic curve (AUROC), accuracy, sensitivity, specificity, positive predictive value, negative predictive value, and confusion matrix for each model after calibration wth corresponding risk threshold. We caculated the metrics on the post-COVID testing and peri-COVID samples. We used McNamer's test to statistically compare our ML algorithms to two logistic regression-based models in terms of AUROC on both samples. We carried out the McNamer's test with 2000 stratified bootstrapping replications and an alpha level of 0.05. The code for performance examination and statistical comparison is available in [performance.R](https://github.com/inspiredcancercare/IOTOXACU/blob/be49e816355b7b78b1748eaa497aa85e00fe8c0a/R%20code/performance.R)
+To examine model performance, we calculated performance metrics including area under the receiver operating charactistic curve (AUROC), accuracy, sensitivity, specificity, positive predictive value, negative predictive value, and confusion matrix for each model after calibration wth corresponding risk threshold. We caculated the metrics on the pre-COVID testing and peri-COVID samples. We used McNamer's test to statistically compare our ML algorithms to two logistic regression-based models in terms of AUROC on both samples. We carried out the McNamer's test with 2000 stratified bootstrapping replications and an alpha level of 0.05. The code for performance examination and statistical comparison is available in [performance.R](https://github.com/inspiredcancercare/IOTOXACU/blob/be49e816355b7b78b1748eaa497aa85e00fe8c0a/R%20code/performance.R)
 
 In addition to the statistical examinations, we used two model agnostic approaches, variable importance analysis and Shapley additive explanation, to provide additional insights into model behaviors and information potentially enabling individualized preventive intervention provision. We used [R DELAX package version 1.2.1](https://github.com/ModelOriented/DALEX) to reveal how our models utilized data to generate predictions for the peri-COVID sample. 
 
@@ -792,7 +792,7 @@ eTable 2. Candidate predictors
     <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
-    <td class="tg-kcps">Diastolic blood pressurelast, mean, SD</td>
+    <td class="tg-kcps">Diastolic blood pressure last, mean, SD</td>
     <td class="tg-cwad">Numeric</td>
   </tr>
   <tr>
@@ -942,9 +942,9 @@ eFigure 4. Calibration plot for the support vector machine algorithm.
   <img src="https://user-images.githubusercontent.com/38151091/182250954-a73e642b-1f5f-43d9-9ace-c395462877bd.png">
 </p>
 
-eFigure 5. Calibration plot for the logistic regression with elastic net panelty algorithm.
+eFigure 5. Calibration plot for the logistic regression with elastic net penalty algorithm.
 
-**Note:** The calibration plot for the logistic regression with elastic net panelty is similar to the plot for support vector machine. The red line is sightly closer to the diagonal sold black line indicate a sightly better calibration as compared to the support vector machine.
+**Note:** The calibration plot for the logistic regression with elastic net penalty is similar to the plot for support vector machine. The red line is sightly closer to the diagonal sold black line indicate a sightly better calibration as compared to the support vector machine.
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182249063-743b503a-eaa1-4baf-b075-912319ba094f.png">
@@ -1007,35 +1007,35 @@ eFigure 11. Important variables for support vector machine algorithm.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182247115-bbe64520-558d-4de2-90ce-abca45648ec9.png">
 </p>
-eFigrue 12. Important variables for the logistic regression with elastic net penalty algorithm.
+eFigure 12. Important variables for the logistic regression with elastic net penalty algorithm.
 
 <br>
 </br>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182247209-bb4cee6f-e4d3-4528-a7f3-cbb0f51be661.png">
 </p>
-eFigrue 13. Important variables for the single hidden layer neural network algorithm.
+eFigure 13. Important variables for the single hidden layer neural network algorithm.
 
 <br>
 </br>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182247307-e6d7612d-8295-4d25-b8bd-1c6444047fc1.png">
 </p>
-eFigrue 14. Important variables for the k nearest neighbors algorithm.
+eFigure 14. Important variables for the k nearest neighbors algorithm.
 
 <br>
 </br>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182247380-7ce84ca6-c2d1-42d4-9dac-9c16223d5cff.png">
 </p>
-eFigrue 15. Important variables for the multivariate adaptive regression spline algorithm.
+eFigure 15. Important variables for the multivariate adaptive regression spline algorithm.
 
 <br>
 </br>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182247472-16cc4d1c-f9d3-45fe-a1fd-b77798c5b809.png">
 </p>
-eFigrue 16. Important variables for the decision tree algorithm.
+eFigure 16. Important variables for the decision tree algorithm.
 <br>
 </br>
 
@@ -1059,14 +1059,14 @@ eFigure 17. Contributions of predictor values to the prediction of the random fo
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182392324-04812c60-d44b-4ab8-a34e-8e442ad9e751.png">
 </p>
-eFigrue 18. Contributions of predictor values to the prediction of the support vector machine for the randomly selected case.
+eFigure 18. Contributions of predictor values to the prediction of the support vector machine for the randomly selected case.
 
 <br>
 </br>
 <p align="center">
   <img src="https://user-images.githubusercontent.com/38151091/182392736-333aa0b9-c9aa-4efc-9b10-066d2b6888d7.png">
 </p>
-eFigure 19. Contributions of predictor values to the prediction of the logistic regression with elastic net panelty algorithm for the randomly selected case.
+eFigure 19. Contributions of predictor values to the prediction of the logistic regression with elastic net penalty algorithm for the randomly selected case.
 <br>
 </br>
 
